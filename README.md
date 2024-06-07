@@ -113,6 +113,8 @@ The `elzero-web-school` folder contains content from Elzero Web School, known fo
     <a href="https://www.geeksforgeeks.org/"><img alt="GeeksforGeeks" src="https://img.shields.io/badge/GeeksforGeeks-%231F8ACB.svg?style=plastic&logo=geeksforgeeks&logoColor=white" height="40" width="200"/></a>
   &emsp;
     <a href="https://www.w3schools.com/"><img alt="W3Schools" src="https://img.shields.io/badge/W3Schools-%231F8ACB.svg?style=plastic&logo=w3schools&logoColor=white" height="40" width="200"/></a>
+  &emsp;
+    <a href="https://stackoverflow.com/"><img alt="Stack Overflow" src="https://img.shields.io/badge/Stack%20Overflow-F58025.svg?style=plastic&logo=stackoverflow&logoColor=white" height="40" width="200"/></a>
 </p>
 
 
@@ -122,10 +124,13 @@ The `elzero-web-school` folder contains content from Elzero Web School, known fo
     <a href="https://pythontutor.com/"><img alt="PythonTutor" src="https://img.shields.io/badge/PythonTutor-%231F8ACB.svg?style=plastic&logo=python&logoColor=white" height="40" width="200"/></a>
   &emsp;
     <a href="https://www.drawio.com/"><img alt="draw.io" src="https://img.shields.io/badge/draw.io-%231F8ACB.svg?style=plastic&logo=diagrams.net&logoColor=white" height="40" width="200"/></a>
+  &emsp;
+    <a href="https://clickup.com/"><img alt="ClickUp" src="https://img.shields.io/badge/ClickUp-7B68EE.svg?style=plastic&logo=clickup&logoColor=white" height="40" width="200"/></a>
 </p>
 
 1. **PythonTutor**: An important tool for debugging the code well and improving visualization when writing the code and what happens behind the screen. 
 2. **draw.io**: An important tool to help in making diagrams and planning projects.
+3. **ClickUp**: streamlines project management with intuitive task organization and seamless team collaboration, empowering efficient workflow management and goal attainment.
 
 ## Websites for Problem Solving
 
@@ -147,11 +152,12 @@ The `elzero-web-school` folder contains content from Elzero Web School, known fo
 
 ## Books
 
-1. [Grokking Algorithms](https://archive.org/details/grokking-algorithms-an-illustrated-guide-for-programmers-and-other-curious-people/page/55/mode/2up)
-2. [Introduction to Algorithms](https://edutechlearners.com/download/Introduction_to_algorithms-3rd%20Edition.pdf)
-3. [Algorithms Notes For Professionals](https://www.dbooks.org/algorithms-notes-for-professionals-1460/read/)
-4. [C# Notes For Professionals](https://www.dbooks.org/c-notes-for-professionals-1466/)
-5. [Clean Code by Robert C. Martin](https://drive.google.com/file/d/1anGq4rROh7DAF-c35-k7a3cizXHu9F6L/view)
+1. [Data Structures And Algorithms Made Easy In CPP](https://drive.google.com/file/d/1QrvXQpiMOFM-n8g6H6iNQ-e7P6K5HhiZ/preview)
+2. [Grokking Algorithms](https://archive.org/details/grokking-algorithms-an-illustrated-guide-for-programmers-and-other-curious-people/page/55/mode/2up)
+3. [Introduction to Algorithms](https://edutechlearners.com/download/Introduction_to_algorithms-3rd%20Edition.pdf)
+4. [Algorithms Notes For Professionals](https://www.dbooks.org/algorithms-notes-for-professionals-1460/read/)
+5. [C# Notes For Professionals](https://www.dbooks.org/c-notes-for-professionals-1466/)
+6. [Clean Code by Robert C. Martin](https://drive.google.com/file/d/1anGq4rROh7DAF-c35-k7a3cizXHu9F6L/view)
 
 ## Important Tips
 
