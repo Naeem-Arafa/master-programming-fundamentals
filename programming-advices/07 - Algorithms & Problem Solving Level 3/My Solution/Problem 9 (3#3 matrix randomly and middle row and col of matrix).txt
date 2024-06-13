@@ -1,0 +1,111 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+
+#define ll long long
+using namespace std;
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+}
+
+void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			arr[i][j] = RandomNumber(1, 100);
+		}
+	}
+}
+
+short MiddleOfRow(short Rows)
+{
+	return (Rows - 1) / 2;
+}
+
+short MiddleOfCol(short Cols)
+{
+	return (Cols - 1) / 2;
+}
+
+void PrintMiddleRowInMatrix(int arr[3][3], short Rows, short Cols)
+{
+	for (int i = Rows; i < Rows + 1; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			cout << setw(3) << arr[i][j] << "\t\t";
+		}
+		cout << '\n';
+	}
+}
+
+void PrintMiddleColInMatrix(int arr[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = Cols; j < Cols + 1; j++)
+		{
+			cout << setw(3) << arr[i][j] << "\t\t";
+		}
+		cout << ' ';
+	}
+}
+
+void PrintMatrix(int arr[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			cout << setw(3) << arr[i][j] << "\t\t";
+		}
+		cout << '\n';
+	}
+}
+
+int main()
+{
+	//Seeds the random number generator in C++, called only once
+	srand((unsigned)time(NULL));
+	int arr[3][3];
+	short MidRow = MiddleOfRow(3);
+	short MidCol = MiddleOfCol(3);
+	FillMatrixWithRandomNumbers(arr, 3, 3);
+	cout << "The following is a 3x3 random matrix 1:\n";
+	PrintMatrix(arr, 3, 3);
+	cout << "\nThe Middle Row In Matrix 1:\n";
+	PrintMiddleRowInMatrix(arr, MidRow, 3);
+	cout << "\nThe Middle Col In Matrix 1:\n";
+	PrintMiddleColInMatrix(arr, 3, MidCol);
+	
+	
+
+}
+
+
+
+########################## we can do it also ################
+void PrintMiddleRowInMatrix(int arr[3][3], short Rows, short Cols)
+{
+	for (int j = 0; j < Cols; j++)
+	{
+		printf(" %0*d   ", 2, arr[Rows][j]);
+	}
+}
+
+void PrintMiddleColInMatrix(int arr[3][3], short Rows, short Cols)
+{
+	for (int j = 0; j < Rows; j++)
+	{
+		printf(" %0*d   ", 2, arr[j][Cols]);
+	}
+}
+
+

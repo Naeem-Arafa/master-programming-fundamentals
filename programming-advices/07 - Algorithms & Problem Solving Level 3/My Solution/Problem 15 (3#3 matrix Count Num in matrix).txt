@@ -1,0 +1,64 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+//#include <string>
+
+#define ll long long
+using namespace std;
+
+int ReadNum(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num < 0);
+
+	return Num;
+}
+
+
+short CountNumInMutrix(int arr[3][3], int Num,short Rows, short Cols)
+{
+	short Counter = 0;
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{		
+			if ( arr[i][j] == Num)
+			{
+				Counter++;
+			}
+		}
+	}
+	return Counter;
+}
+void PrintMatrix(int arr[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			printf(" %0*d   ", 2, arr[i][j]);
+		}
+		cout << '\n';
+	}
+}
+
+int main()
+{
+	int arr[3][3] = { {9, 0, 2}, {9, 9, 0}, {1, 0, 9} };
+	cout << "The following is a 3x3 random matrix 1:\n";
+	PrintMatrix(arr, 3, 3);
+	
+	short Num = ReadNum("Enter the number to count in matrix? ");
+	cout << "Number " << Num << " count in matrix is " << CountNumInMutrix(arr, Num, 3, 3) << endl;
+	
+
+}
+
+
+
+

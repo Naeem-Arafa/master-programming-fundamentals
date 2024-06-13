@@ -1,0 +1,184 @@
+#pragma warning(disable : 4996)
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+short ReadNum(string massage)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < 0);
+
+    return Num;
+}
+
+short ReadNum(string massage, short From, short To)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < From || Num > To);
+
+    return Num;
+}
+
+bool IsLeapYear(short Year)
+{
+    return(Year % 400 == 0) || (Year % 4 == 0 && Year % 100 != 0);
+}
+
+int NumberOfDays(short Year)
+{
+    return (IsLeapYear(Year)) ? 366 : 365;
+}
+
+
+short NumberOfDaysInMonth(short Month, short Year)
+{
+    if (Month < 1 || Month > 12)
+    {
+        return 0;
+    }
+
+    return (Month == 2) ? ((IsLeapYear(Year)) ? 29 : 28) :
+        (Month <= 7 && Month % 2 != 0) || (7 < Month && Month % 2 == 0) ? 31 : 30;
+}
+
+bool IsLastDayInMonth(short Day, short Month, short Year)
+{
+    return (NumberOfDaysInMonth(Month, Year) == Day);
+}
+
+bool IsLastMonthInYear(short Month)
+{
+    return (Month == 12);
+}
+
+string DateName(short Day)
+{
+    string arr[7] = { "Sun", "Mon", "Tus", "Wed", "Thu", "Fri", "Sat" };
+    return arr[Day];
+}
+
+short DateOrder(short Day, short Month, short Year)
+{
+    short a = (14 - Month) / 12;
+    short y = Year - a;
+    short m = Month + 12 * a - 2;
+    short d = (Day + y + (y / 4) - (y / 100) + (y / 400) + (31 * m / 12)) % 7;
+    return d;
+}
+
+
+
+struct sDate
+{
+    short Day;
+    short Month;
+    short Year;
+};
+
+sDate IncreaseDateByOne(short Day, short Month, short Year)
+{
+    sDate Date;
+    Date.Day = Day;
+    Date.Month = Month;
+    Date.Year = Year;
+
+    if (IsLastDayInMonth(Date.Day, Date.Month, Date.Year))
+    {
+        if (IsLastMonthInYear(Date.Month))
+        {
+            Date.Year++;
+            Date.Month = 1;
+            Date.Day = 1;
+        }
+        else
+        {
+            Date.Month++;
+            Date.Day = 1;
+        }
+    }
+    else
+    {
+        Date.Day++;
+    }
+    return Date;
+}
+
+bool IsDate1LessThanDate2(sDate Date, sDate Date2)
+{
+    return (Date.Year < Date2.Year) ? true : (Date.Month < Date2.Month) ? true : (Date.Day < Date2.Day) ? true : false;
+}
+
+int GetDiffrenceInDays(sDate Date, sDate Date2, bool EndDay = false)
+{
+    int Days = 0;
+    while (IsDate1LessThanDate2(Date, Date2))
+    {
+        Days++;
+        Date = IncreaseDateByOne(Date.Day, Date.Month, Date.Year);
+    }
+    return (EndDay) ? ++Days : Days;
+}
+
+
+short DateOrder(sDate Date)
+{
+    return DateOrder(Date.Day, Date.Month, Date.Year);
+}
+
+bool IsWeekEnd(sDate Date)
+{
+    short DayIndex = DateOrder(Date);
+    return (DayIndex == 5 || DayIndex == 6);
+}
+
+short CalculateVacationDays(sDate DateFrom, sDate DateTo)
+{
+    short Days = 0;
+    while (IsDate1LessThanDate2(DateFrom, DateTo))
+    {
+        if (!IsWeekEnd(DateFrom))
+        {
+            Days++;
+        } 
+        DateFrom = IncreaseDateByOne(DateFrom.Day, DateFrom.Month, DateFrom.Year);
+    }
+    return Days;
+}
+
+int main()
+{
+    //cout << INT_MAX;
+    sDate Date;
+    cout << "Vacation Starts: \n";
+    Date.Day = ReadNum("Enter A Day? ", 1, 31);
+    Date.Month = ReadNum("Enter A Month? ", 1, 12);
+    Date.Year = ReadNum("Enter A Year? ");
+
+    sDate Date2;
+    cout << "\nVacation Ends: \n";
+    Date2.Day = ReadNum("Enter A Day? ", 1, 31);
+    Date2.Month = ReadNum("Enter A Month? ", 1, 12);
+    Date2.Year = ReadNum("Enter A Year? ");
+  
+    cout << "\nVacation From: " << DateName(DateOrder(Date)) << ", " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    cout << "\nVacation To: " << DateName(DateOrder(Date2)) << ", " << Date2.Day << '\\' << Date2.Month << '\\' << Date2.Year;
+
+    cout << "\n\nActual Vacation Days is: " << CalculateVacationDays(Date, Date2);
+    
+    
+    
+    return 0;
+}
+//2147483647
+
+

@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string readstring()
+{
+	string str;
+	cout << "please enter your string?\n";
+	getline(cin, str);
+	return str;
+}
+
+string TrimLeft(string Str)
+{
+	for (short i = 0; i < Str.length(); i++)
+	{
+		if (Str[i] != ' ')
+		{
+			return Str.substr(i, Str.length() - i);
+		}
+	}
+}
+
+string TrimRight(string Str)
+{
+	for (short i = Str.length() - 1; i >= 0; i--)
+	{
+		if (Str[i] != ' ')
+		{
+			return Str.substr(0, i + 1);
+		}
+	}
+}
+
+string Trim(string Str)
+{
+	return (TrimLeft(TrimRight(Str)));
+}
+
+
+int main()
+{
+	string Str = readstring();
+	cout << "\n String      = " << Str;
+	cout << "\n\n Trim Left   = " << TrimLeft(Str);
+	cout << "\n\n Trim Right  = " << TrimRight(Str);
+	cout << "\n\n Trim        = " << Trim(Str);
+}

@@ -1,0 +1,56 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <string>
+
+#define ll long long
+using namespace std;
+
+string ReadString()
+{
+	string str = " ";
+	getline(cin, str);
+	return str;
+}
+
+string PrintFirstLettersInStringInUpper(string str)
+{
+	str[0] = toupper(str[0]);
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (i != str.size() - 1 && str[i] == ' ')
+		{
+			str[i + 1] = toupper(str[i + 1]);
+		}
+	}
+	return str;
+}
+
+
+string PrintFirstLettersInStringInLower(string str)
+{
+	str[0] = tolower(str[0]);
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (i != str.size() - 1  && str[i] == ' ')
+		{
+			str[i + 1] = tolower(str[i + 1]);
+		}
+	}
+	return str;
+}
+
+
+int main()
+{
+	string str = ReadString();
+	cout << "\nString after upper:\n" << PrintFirstLettersInStringInUpper(str);
+
+	cout << "\n\nString after lower:\n" << PrintFirstLettersInStringInLower(str);
+	
+}
+
+
+
+

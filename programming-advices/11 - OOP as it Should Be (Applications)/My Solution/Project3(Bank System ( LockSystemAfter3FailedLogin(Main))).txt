@@ -1,0 +1,17 @@
+#include <iostream>
+#include "clsLoginScreen.h"
+
+
+int main()
+
+{
+    while (true)
+    {
+        if (!clsLoginScreen::ShowLoginScreen())
+        {
+            break;
+        }
+        // while (true & clsLoginScreen::ShowLoginScreen()); We Can Do This Also.
+    }
+    return 0;
+}

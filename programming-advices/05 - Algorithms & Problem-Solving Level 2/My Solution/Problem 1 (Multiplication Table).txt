@@ -1,0 +1,57 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void PrintTheHead(int From, int To)
+{
+	cout << "                                Multiplication Table From " << From << " To " << To << "                                \n";
+}
+
+void PrintTheHeadNums(int From, int To)
+{
+	for (int i = From; i <= To; i++)
+	{
+		cout << "          " << i;
+	}
+	cout << endl;
+}
+
+void PrintLineHead()
+{
+	cout << "--------------------------------------------------------------------------------------------------------------\n";
+}
+
+void PrintTheBoidMult(int From, int To)
+{
+	for (int i = 1; i <= 10; i++)
+	{
+		if (i >= 10)
+			cout << i << "   |    ";
+		else
+			cout << i << "    |    ";
+		for (int j = 1; j <= 10; j++)
+		{
+			if (i * j >= 10)
+			{
+				cout << i * j << "         ";
+			}
+			else
+			{
+				cout << i * j << "          ";
+			}
+
+		}
+		cout << "\n";
+	}
+}
+
+int main()
+{
+	PrintTheHead(1, 10);
+	PrintLineHead();
+	PrintTheHeadNums(1, 10);
+	PrintTheBoidMult(1, 10);
+}
+
+For Profetinal Editting: 
+################# You Can Use \t another space####################

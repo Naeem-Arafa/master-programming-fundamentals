@@ -1,0 +1,87 @@
+#pragma once
+#include <iostream>
+#include "clsScreen.h"
+#include "clsBankClient.h"
+#include "clsInputValidate.h"
+
+class clsTransferScreen : protected clsScreen
+{
+private:
+    static void _PrintClient(clsBankClient Client)
+    {
+        cout << "\nClient Card:";
+        cout << "\n___________________";
+        cout << "\nFull Name   : " << Client.FullName();
+        cout << "\nAcc. Number : " << Client.AccountNumber();
+        cout << "\nBalance     : " << Client.AccountBalance;
+        cout << "\n___________________\n";
+    }
+
+    static string _ReadAccountNumber(string Str = "\nPlease enter AccountNumber? ")
+    {
+        string AccountNumber = "";
+        cout << Str;
+        cin >> AccountNumber;
+        return AccountNumber;
+    }
+
+public:
+    static void ShowDepositScreen()
+    {
+        _DrawScreenHeader("\t   Deposit Screen");
+
+        string FromAccountNumber = _ReadAccountNumber("\nPlease Enter AccountNumber To Transfer From: ");
+        
+
+        while (!clsBankClient::IsClientExist(FromAccountNumber))
+        {
+            cout << "\nClient with [" << FromAccountNumber << "] does not exist.\n";
+            FromAccountNumber = _ReadAccountNumber("\nPlease Enter AccountNumber To Transfer From: ");
+        }
+
+        clsBankClient Client1 = clsBankClient::Find(FromAccountNumber);
+        _PrintClient(Client1);
+
+        string ToAccountNumber = _ReadAccountNumber("\nPlease Enter AccountNumber To Transfer To: ");
+        while (!clsBankClient::IsClientExist(ToAccountNumber))
+        {
+            cout << "\nClient with [" << ToAccountNumber << "] does not exist.\n";
+            ToAccountNumber = _ReadAccountNumber("\nPlease Enter AccountNumber To Transfer To: ");
+        }
+
+        clsBankClient Client2 = clsBankClient::Find(ToAccountNumber);
+        _PrintClient(Client2);
+
+        double Amount = 0;
+        cout << "\nPlease enter transfer amount? ";
+        Amount = clsInputValidate::ReadDblNumber();
+
+        cout << "\nAre you sure you want to perform this transaction? ";
+        char Answer = 'n';
+        cin >> Answer;
+
+        if (Answer == 'Y' || Answer == 'y')
+        {
+            if (Client1.Withdraw(Amount))
+            {
+                Client2.Deposit(Amount);
+                cout << "\nAmount Transfered Successfully.\n";
+                cout << "\nNew Balance Is: " << Client1.AccountBalance;
+                _PrintClient(Client1);
+                _PrintClient(Client2);
+            }
+            else
+            {
+                cout << "\nCannot transfer, Insuffecient Balance!\n";
+                cout << "\nAmout to transfer is: " << Amount;
+                cout << "\nYour Balance is: " << Client1.AccountBalance;
+            }
+           
+        }
+        else
+        {
+            cout << "\nOperation was cancelled.\n";
+        }
+    }
+
+};

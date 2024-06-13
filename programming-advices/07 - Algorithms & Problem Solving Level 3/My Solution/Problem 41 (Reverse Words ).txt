@@ -1,0 +1,61 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+
+using namespace std;
+
+string ReadString()
+{
+	string S1;
+	cout << "Please Enter Your String?\n";
+	getline(cin, S1);
+	return S1;
+}
+
+vector<string> SplitString(string Str, string Delim)
+{
+	vector<string> vec;
+	short pos = 0;
+	string sWord;
+	while ((pos = Str.find(Delim)) != std::string::npos)
+	{
+		sWord = Str.substr(0, pos);
+		if (sWord != "")
+		{
+			vec.push_back(sWord);
+		}
+		//erase() until positon and move to next word.
+		Str.erase(0, pos + Delim.length());
+	}
+	if (Str != "")
+	{
+		vec.push_back(Str); // it add the last word of the string.
+	}
+	return vec;
+}
+
+
+string ReverseWorldInString(string Str)
+{
+	vector<string> vec;
+	string Str2 = "";
+	vec = SplitString(Str, " ");
+	vector<string>::iterator it = vec.end();
+	while (it != vec.begin())
+	{
+		--it;
+		Str2 += *it + " ";
+	}
+	Str2 = Str2.substr(0, Str2.length() - 1);// remove last space
+	return Str2;
+}
+
+
+int main()
+{
+	string Str = ReadString();
+	cout << "String after reversing world: ";
+	cout << '\n' << ReverseWorldInString(Str);
+
+}

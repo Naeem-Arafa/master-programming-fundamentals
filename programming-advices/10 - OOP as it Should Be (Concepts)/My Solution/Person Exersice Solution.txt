@@ -1,0 +1,111 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+class clsPerson
+{
+private:
+	short _ID;
+	string _FirstName;
+	string _LastName;
+	string _Email;
+	string _Phone;
+	string _EmailSubject;
+	string _EmailBody;
+	string _SMSMassage;
+
+public:
+
+	clsPerson(short ID, string FirstName, string LastName, string Email, string Phone)
+	{
+		_ID = ID;
+		_FirstName = FirstName;
+		_LastName = LastName;
+		_Email = Email;
+		_Phone = Phone;
+	}
+
+	void SetFirstName(string FirstName)
+	{
+		_FirstName = FirstName;
+	}
+	void SetLastName(string LastName)
+	{
+		_LastName = LastName;
+	}
+	void SetEmail(string Email)
+	{
+		_Email = Email;
+	}
+	void SetPhone(string Phone)
+	{
+		_Phone = Phone;
+	}
+
+	short ID()
+	{
+		return _ID;
+	}
+	string FirstName()
+	{
+		return _FirstName;
+	}
+	string LastName()
+	{
+		return _LastName;
+	}
+	string Email()
+	{
+		return _Email;
+	}
+	string Phone()
+	{
+		return _Phone;
+	}
+
+	void SendEmail(string EmailSubject, string EmailBody)
+	{
+		_EmailSubject = EmailSubject;
+		_EmailBody = EmailBody;
+		cout << "\n\nThe following message sent successfully to email : " << _Email << '\n';
+		cout << "Subject: " << _EmailSubject << '\n';
+		cout << "Body: " << _EmailBody << endl;
+	}
+
+	void SendSMS(string SMSMassage)
+	{
+		_SMSMassage = SMSMassage;
+		cout << "\n\nThe following message sent successfully to phone : " << _Phone << '\n';
+		cout << _SMSMassage << endl;
+	}
+
+
+	void Print()
+	{
+		cout << "Info:\n\n_____________________________\n\n";
+		cout << "ID           : " << ID() << endl;
+		cout << "First Name   : " << FirstName() << endl;
+		cout << "Last Name    : " << LastName() << endl;
+		cout << "Full Name    : " << FirstName() << " " << LastName() << endl;
+		cout << "Email        : " << Email() << endl;
+		cout << "Phone        : " << Phone() << endl;
+		cout << "_____________________________\n";
+	}
+
+	
+};
+
+int main()
+{
+	clsPerson Person(10, "Naeem", "Arafa", "My@gmail.com", "01063084680");
+	Person.Print();
+	
+	
+	Person.SendEmail("Hi", "How Are You?");
+	Person.SendSMS("How Are You?");
+
+	return 0;
+}
+
+

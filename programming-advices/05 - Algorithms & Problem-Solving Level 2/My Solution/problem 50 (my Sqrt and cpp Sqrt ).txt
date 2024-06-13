@@ -1,0 +1,25 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+float ReadNumber(string massage)
+{
+	float Num;
+	cout << massage << "\n";
+	cin >> Num;	
+	return Num;
+}
+
+float MySqrt(float Num)
+{
+	return pow(Num, 0.5);
+}
+
+int main()
+{
+	float Num = ReadNumber("Pleaze enter the num? ");
+	cout << "My Sqrt result: " << MySqrt(Num) << endl;
+	cout << "C++ Sqrt result: " << sqrt(Num) << endl;
+	return 0;
+}

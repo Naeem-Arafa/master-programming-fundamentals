@@ -1,0 +1,63 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <string>
+
+#define ll long long
+using namespace std;
+
+char ReadChar()
+{
+	char str = ' ';
+	cin >> str;
+	return str;
+}
+
+char PrintCharInUpper(char str)
+{
+	str = toupper(str);
+	return str;
+}
+
+
+char PrintCharInLower(char str)
+{
+	str = tolower(str);
+	return str;
+}
+
+bool IsUpper(char str)
+{
+	if (isupper(str))
+	{
+		return true;
+	}
+	return false;
+}
+
+
+int main()
+{
+	char str = ReadChar();
+	if (IsUpper(str))
+	{
+		cout << "\nChar after lower:\n" << PrintCharInLower(str);
+	}
+	else
+	{
+		cout << "\nChar after upper:\n" << PrintCharInUpper(str);
+	}
+
+	
+	
+}
+
+
+
+########################## to profesional############
+char InverseLetterCase(char str)
+{
+	return isupper(str) ? tolower(str) : toupper(str);
+}
+

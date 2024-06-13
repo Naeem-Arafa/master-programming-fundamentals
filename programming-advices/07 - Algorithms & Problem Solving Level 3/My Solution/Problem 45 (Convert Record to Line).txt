@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+
+using namespace std;
+
+struct sClient
+{
+	string AcountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AcountBalance;
+};
+
+string ReadString(string Massage)
+{
+	string S1;
+	cout << Massage << " ";
+	getline(cin, S1);
+	return S1;
+}
+
+double ReadNum(string massage)
+{
+	double Num;
+	do
+	{
+		cout << massage << " ";
+		cin >> Num;
+	} while (Num < 0);
+
+	return Num;
+}
+
+
+sClient ReadNewClient()
+{
+	sClient Client;
+	Client.AcountNumber = ReadString("Enter Account Number?");
+	Client.PinCode = ReadString("Enter pin code?");
+	Client.Name = ReadString("Enter Name?");
+	Client.Phone = ReadString("Enter Phone Number?");
+	Client.AcountBalance = ReadNum("Enter Your Balance?");
+	
+	return Client;
+}
+
+string ConvertRecordToLine(sClient Client, string Sep = "#//#")
+{
+	string stClientRecord = "";
+	stClientRecord += Client.AcountNumber + Sep;
+	stClientRecord += Client.PinCode + Sep;
+	stClientRecord += Client.Name + Sep;
+	stClientRecord += Client.Phone + Sep;
+	stClientRecord += to_string( Client.AcountBalance); // casting from double to string
+	return stClientRecord;
+}
+
+int main()
+{
+	cout << "Please Enter Client Data:\n";
+
+	sClient Client;
+	Client = ReadNewClient();
+
+	cout << "\n\nClient Record For Saving Is: \n";
+	cout << ConvertRecordToLine(Client);
+
+}

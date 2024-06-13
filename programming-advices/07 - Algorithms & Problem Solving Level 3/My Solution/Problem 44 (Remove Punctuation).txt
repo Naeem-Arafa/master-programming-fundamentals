@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+
+using namespace std;
+
+string ReadString()
+{
+	string S1;
+	cout << "Please Enter Your String?\n";
+	getline(cin, S1);
+	return S1;
+}
+
+
+
+string RemovePunctuation(string Str)
+{
+	string Str2 = "";
+	for (short i = 0; i < Str.length(); i++)
+	{
+		if (!ispunct(Str[i]))
+		{
+			Str2 += Str[i];
+		}
+	}
+	return Str2;
+	
+}
+
+
+
+int main()
+{
+	string Str = ReadString();
+	
+	cout << "\nOriginal String: " << Str;
+	cout << "\nRemove Punctuation: ";
+	cout << RemovePunctuation(Str);
+
+}

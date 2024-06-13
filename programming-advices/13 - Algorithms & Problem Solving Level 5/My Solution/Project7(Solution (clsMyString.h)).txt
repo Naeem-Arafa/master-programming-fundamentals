@@ -1,0 +1,49 @@
+#pragma once
+#include <iostream>
+#include "clsMyStackArr.h"
+using namespace std;
+
+template <class T>
+class clsMyString
+{
+
+private:
+	T _Value;
+	clsMyStackArr <string> _Undo;
+	clsMyStackArr <string> _Redo;
+
+public:
+
+	void Set(T Item)
+	{
+		_Undo.push(_Value);
+		_Value = Item;
+	}
+
+	T Get()
+	{
+		return _Value;
+	}
+	__declspec(property(get = Get, put = Set)) T Value;
+
+	void Undo()
+	{
+		if (!_Undo.Empty())
+		{
+			_Redo.push(_Value);
+			_Value = _Undo.Top();
+			_Undo.pop();
+		}
+	}
+
+	void Redo()
+	{
+		if (!_Redo.Empty())
+		{
+			_Undo.push(_Value);
+			_Value = _Redo.Top();
+			_Redo.pop();
+		}
+	}
+
+};

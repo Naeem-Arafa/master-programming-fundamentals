@@ -1,0 +1,79 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+
+int ReadNum(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num <= 0);
+
+	return Num;
+}
+
+void ReverseNumbers(int Num)
+{
+	int Number1 = 0;
+	while (Num != 0)
+	{
+		int rimainder = Num % 10;
+		Num = Num / 10;
+		Number1 = Number1 * 10 + rimainder;
+	}
+	cout << Number1;
+}
+
+
+int main()
+{
+	ReverseNumbers(ReadNum("Enter The Positive Number? "));
+}
+
+
+
+
+
+
+##############################There Are This Solution But Return The Num As String#################################
+
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+
+int ReadNum(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num <= 0);
+
+	return Num;
+}
+
+void ReverseNumbers(int Num)
+{
+	string Reverse = "";
+	while (Num != 0)
+	{
+		int rimainder = Num % 10;
+		Num = Num / 10;
+		Reverse.append(to_string(rimainder));
+	}
+	cout << Reverse;
+}
+
+
+int main()
+{
+	ReverseNumbers(ReadNum("Enter The Positive Number? "));
+}

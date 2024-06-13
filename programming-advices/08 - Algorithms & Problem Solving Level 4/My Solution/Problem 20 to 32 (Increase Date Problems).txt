@@ -1,0 +1,288 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+short ReadNum(string massage)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < 0);
+
+    return Num;
+}
+
+short ReadNum(string massage, short From, short To)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < From || Num > To);
+
+    return Num;
+}
+
+bool IsLeapYear(short Year)
+{
+    return(Year % 400 == 0) || (Year % 4 == 0 && Year % 100 != 0);
+}
+
+short NumberOfDaysInMonth(short Month, short Year)
+{
+    if (Month < 1 || Month > 12)
+    {
+        return 0;
+    }
+
+    return (Month == 2) ? ((IsLeapYear(Year)) ? 29 : 28) :
+        (Month <= 7 && Month % 2 != 0) || (7 < Month && Month % 2 == 0) ? 31 : 30;
+}
+
+bool IsLastDayInMonth(short Day, short Month, short Year)
+{
+    return (NumberOfDaysInMonth(Month, Year) == Day);
+}
+
+bool IsLastMonthInYear(short Month)
+{
+    return (Month == 12);
+}
+
+struct sDate
+{
+    short Day;
+    short Month;
+    short Year;
+};
+
+sDate IncreaseDateByOne(sDate Date)
+{
+
+    if (IsLastDayInMonth(Date.Day, Date.Month, Date.Year))
+    {
+        if (IsLastMonthInYear(Date.Month))
+        {
+            Date.Year++;
+            Date.Month = 1;
+            Date.Day = 1;
+        }
+        else
+        {
+            Date.Month++;
+            Date.Day = 1;
+        }
+    }
+    else
+    {
+        Date.Day++;
+    }
+    return Date;
+}
+
+sDate IncreaseDateByXDays(short X, sDate Date)
+{
+    
+
+    for (short i = 0; i < X; i++)
+    {
+        Date = IncreaseDateByOne(Date);
+    }
+    return Date;
+}
+
+sDate IncreaseDateByOneWeek(sDate Date)
+{
+    
+    Date = IncreaseDateByXDays(7, Date);
+    return Date;
+}
+
+sDate IncreaseDateByXWeeks(short X, sDate Date)
+{
+    
+
+    for (short i = 0; i < X; i++)
+    {
+        Date = IncreaseDateByXDays(7, Date);
+    }
+    return Date;
+}
+
+sDate IncreaseDateByOneMonth(sDate Date)
+{
+    
+    if (Date.Month == 12)
+    {
+        Date.Month = 1;
+        Date.Year++;
+    }
+    else
+    {
+        Date.Month++;
+    }
+
+    short NumberOfDaysInCurrentMonth = NumberOfDaysInMonth(Date.Month, Date.Year);
+    if (Date.Day > NumberOfDaysInCurrentMonth)
+    {
+        Date.Day = NumberOfDaysInCurrentMonth;
+    }
+    return Date;
+}
+
+sDate IncreaseDateByXMonths(short X, sDate Date)
+{
+    
+
+    for (short i = 0; i < X; i++)
+    {
+        Date = IncreaseDateByOneMonth(Date);
+    }
+    return Date;
+}
+
+
+sDate IncreaseDateByOneYear(sDate Date)
+{
+    if (IsLeapYear(Date.Year) && Date.Month == 2 && Date.Day == 29)
+    {
+        Date.Year++;
+        Date.Day--;
+    }
+    else
+        Date.Year++;
+    return Date;
+}
+
+sDate IncreaseDateByXYears(short X, sDate Date)
+{
+    
+
+    for (short i = 0; i < X; i++)
+    {
+        Date = IncreaseDateByOneYear(Date);
+    }
+    return Date;
+}
+
+sDate IncreaseDateByXYearsFaster(short X, sDate Date)
+{
+    
+    if (IsLeapYear(Date.Year) && Date.Month == 2 && Date.Day == 29)
+    {
+        Date.Year += X;
+        Date.Day--;
+    }
+    else
+        Date.Year += X;
+    
+    return Date;
+}
+
+sDate IncreaseDateByOneDecade(sDate Date)
+{
+    if (IsLeapYear(Date.Year) && Date.Month == 2 && Date.Day == 29)
+    {
+        Date.Year += 10;
+        Date.Day--;
+    }
+    else
+        Date.Year += 10;
+    
+    return Date;
+}
+
+sDate IncreaseDateByXDecades(short X, sDate Date)
+{
+    
+
+    for (short i = 0; i < X; i++)
+    {
+        Date = IncreaseDateByOneDecade(Date);
+    }
+    return Date;
+}
+
+sDate IncreaseDateByXDecadesFaster(short X, sDate Date)
+{
+    
+
+    Date.Year += (X * 10);
+    return Date;
+}
+
+sDate IncreaseDateByOneCentury(sDate Date)
+{
+
+    if (IsLeapYear(Date.Year) && Date.Month == 2 && Date.Day == 29)
+    {
+        Date.Year += 100;
+        Date.Day--;
+    }
+    else
+        Date.Year += 100;
+    return Date;
+}
+
+sDate IncreaseDateByOneMillennium(sDate Date)
+{
+    
+    if (IsLeapYear(Date.Year) && Date.Month == 2 && Date.Day == 29)
+    {
+        Date.Year += 1000;
+        Date.Day--;
+    }
+    else
+        Date.Year += 1000;
+    return Date;
+}
+
+int main()
+{
+    //cout << INT_MAX;
+    sDate Date;
+    Date.Day = ReadNum("Enter A Day? ", 1, 31);
+    Date.Month = ReadNum("Enter A Month? ", 1, 12);
+    Date.Year = ReadNum("Enter A Year? ");
+
+    short X = 10;
+    Date = IncreaseDateByOne(Date);
+    cout << "Date after adding one day is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByXDays(X, Date);
+    cout << "\nDate after adding " << X <<" day is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByOneWeek(Date);
+    cout << "\nDate after adding one week is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByXWeeks(X, Date);
+    cout << "\nDate after adding " << X <<" weeks is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByOneMonth(Date);
+    cout << "\nDate after adding one month is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByXMonths(X, Date);
+    cout << "\nDate after adding " << X <<" months is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByOneYear(Date);
+    cout << "\nDate after adding one year is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByXYears(X, Date);
+    cout << "\nDate after adding " << X <<" years is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByXYearsFaster(X, Date);
+    cout << "\nDate after adding " << X <<" years (faster) is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByOneDecade(Date);
+    cout << "\nDate after adding one decade is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByXDecades(X, Date);
+    cout << "\nDate after adding " << X <<" decades is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByXDecadesFaster(X, Date);
+    cout << "\nDate after adding " << X <<" decades (faster) is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByOneCentury(Date);
+    cout << "\nDate after adding one century is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    Date = IncreaseDateByOneMillennium(Date);
+    cout << "\nDate after adding one millennium is: " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+
+
+    return 0;
+}
+//2147483647
+
+

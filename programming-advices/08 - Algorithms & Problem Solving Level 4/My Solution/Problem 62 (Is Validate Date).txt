@@ -1,0 +1,101 @@
+#pragma warning(disable : 4996)
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+short ReadNum(string massage)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < 0);
+
+    return Num;
+}
+
+short ReadNum(string massage, short From, short To)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < From || Num > To);
+
+    return Num;
+}
+
+bool IsLeapYear(short Year)
+{
+    return(Year % 400 == 0) || (Year % 4 == 0 && Year % 100 != 0);
+}
+
+int NumberOfDays(short Year)
+{
+    return (IsLeapYear(Year)) ? 366 : 365;
+}
+
+
+short NumberOfDaysInMonth(short Month, short Year)
+{
+    if (Month < 1 || Month > 12)
+    {
+        return 0;
+    }
+
+    return (Month == 2) ? ((IsLeapYear(Year)) ? 29 : 28) :
+        (Month <= 7 && Month % 2 != 0) || (7 < Month && Month % 2 == 0) ? 31 : 30;
+}
+
+
+string DateName(short Day)
+{
+    string arr[7] = { "Sun", "Mon", "Tus", "Wed", "Thu", "Fri", "Sat" };
+    return arr[Day];
+}
+
+
+struct sDate
+{
+    short Day;
+    short Month;
+    short Year;
+};
+
+
+sDate ReadFullDate()
+{
+    sDate Date;
+    Date.Day = ReadNum("Enter A Day? ", 1, 31);
+    Date.Month = ReadNum("Enter A Month? ", 1, 12);
+    Date.Year = ReadNum("Enter A Year? ");
+    return Date;
+}
+
+bool IsValidateDay(sDate Date)
+{
+    if (0 < Date.Day && Date.Day <= NumberOfDaysInMonth(Date.Month, Date.Year)
+        && 0 < Date.Month && Date.Month <= 12)
+        return true;
+    return false;
+}
+
+
+int main()
+{
+    //cout << INT_MAX;
+    sDate Date = ReadFullDate();
+
+    if (IsValidateDay(Date))
+        cout << "\n\nYes, Date is validate date.\n";
+    else
+        cout << "\n\nNo, Date is not validate date.\n";
+    return 0;
+}
+//2147483647
+
+

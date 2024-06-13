@@ -1,0 +1,68 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+//#include <string>
+
+#define ll long long
+using namespace std;
+
+bool CheckNumIsExist(int arr[3][3], int Num,short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			if (arr[i][j] == Num)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+void PrintIntersectedNum(int arr2[3][3], int arr[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			if (CheckNumIsExist(arr, arr2[i][j], 3, 3))
+			{
+				cout << arr2[i][j] << ' ';
+			}
+		}
+	}
+}
+
+
+
+void PrintMatrix(int arr[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			printf(" %0*d   ", 2, arr[i][j]);
+		}
+		cout << '\n';
+	}
+}
+
+int main()
+{
+	int arr[3][3] = { {9, 0, 2}, {9, 0, 0}, {0, 0, 9} };
+	int arr2[3][3] = { {9, 1, 2}, {9, 5, 3}, {3, 1, 9} };
+	cout << "The following is a 3x3 random matrix 1:\n";
+	PrintMatrix(arr, 3, 3);
+	cout << "The following is a 3x3 random matrix 2:\n";
+	PrintMatrix(arr2, 3, 3);
+	
+	cout << "\nIntersected Numbers are:\n";
+	PrintIntersectedNum(arr2, arr, 3, 3);
+}
+
+
+
+

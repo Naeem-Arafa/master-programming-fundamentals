@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+
+int ReadNum(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num <= 0);
+
+	return Num;
+}
+
+int CountGigitFrequency(short DigitToCheck, int Number)
+{
+	int FreqCount = 0, Remainder = 0;
+	while (Number > 0)
+	{
+		Remainder = Number % 10;
+		Number = Number / 10;
+		if (DigitToCheck == Remainder)
+		{
+			FreqCount++;
+		}
+	}
+	return FreqCount;
+}
+
+void frequencyNumbers(int Number)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		short DigitFrequency = 0;
+		DigitFrequency = CountGigitFrequency(i, Number);
+		if (DigitFrequency > 0)
+		{
+			cout << "Digit " << i << " Frequency is "
+				<< DigitFrequency << " Time(s).\n";
+		}
+	}
+}
+
+
+int main()
+{
+	
+	int N = ReadNum("Enter The Positive Number? ");
+	frequencyNumbers(N);
+}

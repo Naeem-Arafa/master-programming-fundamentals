@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+int RandomNumber(int From, int To)
+{
+	int randomNum = rand() % (To - From + 1) + From;//this formola to make the random only in range
+	return randomNum;
+}
+
+
+void ReadArandomArray(int arr[100], int& arrLength)
+{
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(-100, 100);
+	}
+	cout << endl;
+}
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+	cout << "\n";
+}
+
+int CountNegativeNumberInRandomArray(int arr[100], int arrLength)
+{
+	int Counter = 0;
+	for (int i = 0; i < arrLength; i++)
+	{
+		if (arr[i] < 0)
+			Counter++;
+	}
+	cout << endl;
+	return Counter;
+}
+
+int main()
+{
+	srand((unsigned)time(NULL));
+	int arr[100], arrLength;
+	ReadArandomArray(arr, arrLength);
+	cout << "Array Element: ";
+	PrintArray(arr, arrLength);
+	cout << "Negative Numbers Count is: " << CountNegativeNumberInRandomArray(arr, arrLength);
+
+}

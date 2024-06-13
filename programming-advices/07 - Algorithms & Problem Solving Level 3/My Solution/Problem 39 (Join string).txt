@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+
+using namespace std;
+
+string LowerChar(string str)
+{
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (!islower(str[i]))
+		{
+			str[i] = tolower(str[i]);
+		}
+	}
+	return str;
+}
+
+vector<string> readstring()
+{
+	vector<string> vec;
+	string str;
+	cout << "Enter strings (type 'done' to stop):\n";
+	do
+	{
+		getline(cin, str);
+		vec.push_back(str);
+
+	} while (LowerChar(str) != "stop");
+	
+	return vec;
+}
+
+
+
+
+string JoinString(vector<string> vec, string Delim)
+{
+	string Str = "";
+	vec.pop_back();
+	for (string& s : vec)
+	{
+		Str = Str + s + Delim;
+	}
+	return Str.substr(0, Str.length() - Delim.length());
+}
+
+int main()
+{
+	
+	cout << "Vector after join: \n";
+	cout << JoinString(readstring(), "*##");
+
+}

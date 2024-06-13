@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+
+//int ReadNum(string massage)
+//{
+//	int Num;
+//	do
+//	{
+//		cout << massage << "\n";
+//		cin >> Num;
+//	} while (Num <= 0);
+//
+//	return Num;
+//}
+
+void PrintWordsFromAAAToZZZ()
+{
+	string word = "";
+	for (int i = 65; i <= 90; i++)
+	{
+		for (int j = 65; j <= 90; j++)
+		{
+			for (int k = 65; k <= 90; k++)
+			{
+				word = word + char(i);
+				word = word + char(j);
+				word = word + char(k);
+				cout << word << endl;
+				word = "";
+			}
+		}
+		cout << "\n____________________________________\n";
+	}
+	
+}
+
+int main()
+{
+	PrintWordsFromAAAToZZZ(/*ReadNum("Enter The Positive Number? ")*/);
+}

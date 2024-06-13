@@ -1,0 +1,85 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+
+#define ll long long
+using namespace std;
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+}
+
+void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			arr[i][j] = RandomNumber(1, 100);
+		}
+	}
+}
+
+void PrintMatrix(int arr[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			cout << setw(3) << arr[i][j] << "\t\t";
+		}
+		cout << '\n';
+	}
+}
+
+int SumColumInMatrix(int arr[3][3], short Rows, short Cols)
+{
+	int Sum = 0;
+	for (short i = 0; i < Cols; i++)
+	{
+		Sum += arr[i][Rows];
+	}
+	return Sum;
+}
+
+void FillArrayWithSumColum(int arr[3][3], int arrRes[3], short Rows, short Cols)
+{
+
+	for (int i = 0; i < Rows; i++)
+	{
+		arrRes[i] = SumColumInMatrix(arr, i, Cols);
+	}
+}
+
+void PrintArraySumColumMatrix(int arrRes[3], short Rows)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		cout << setw(3) << "Colum " << i + 1 << " Sum = " << arrRes[i] << endl;
+	}
+}
+
+int main()
+{
+	//Seeds the random number generator in C++, called only once
+	srand((unsigned)time(NULL));
+	int arr [3][3];
+	int arrRes[3];
+	
+	FillMatrixWithRandomNumbers(arr, 3, 3);
+	cout << "The following is a 3x3 random matrix:\n";
+	PrintMatrix(arr, 3, 3);
+	FillArrayWithSumColum(arr, arrRes, 3, 3);
+	cout << "\n\nThe following are the sum of each colum in the matrix:\n";
+	PrintArraySumColumMatrix(arrRes, 3);
+
+	system("pause>0");
+}
+
+
+
+

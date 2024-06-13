@@ -1,0 +1,63 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+int RandomNumber(int From, int To)
+{
+	int randomNum = rand() % (To - From + 1) + From;//this formola to make the random only in range
+	return randomNum;
+}
+
+
+void ReadArandomArray(int arr[100], int& arrLength)
+{
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(1, 100);
+	}
+	cout << endl;
+}
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+	cout << "\n";
+}
+
+
+void CopyReversedArray(int arrSource[100], int arrDestination[100], int arrLength)
+{
+	int Counter = arrLength;
+	for (int i = 0; i < arrLength; i++)
+	{
+		Counter--;
+		arrDestination[Counter] = arrSource[i];
+	}
+}
+
+int main()
+{
+	srand((unsigned)time(NULL));
+	int arr[100], arrLength;
+	ReadArandomArray(arr, arrLength);
+	int arr2[100];
+	CopyReversedArray(arr, arr2, arrLength);
+
+	cout << "Array 1 Elements: ";
+	PrintArray(arr, arrLength);
+
+	cout << "Reversed array Elements: ";
+	PrintArray(arr2, arrLength);
+
+}
+
+
+
+#########################you can do this instead counter in CopyReversedArray Function ########################
+
+
+arrDestination[i] = arrSource[arrLength-1-i];

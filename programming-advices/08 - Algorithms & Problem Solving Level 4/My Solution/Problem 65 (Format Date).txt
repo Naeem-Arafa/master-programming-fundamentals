@@ -1,0 +1,105 @@
+#pragma warning(disable : 4996)
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstdlib>
+#include <vector>
+using namespace std;
+
+string ReadString(string Message)
+{
+    string str = " ";
+
+    cout << Message;
+    getline(cin >> ws, str);
+    return str;
+}
+
+vector<string> SplitString(string Str, string Delim)
+{
+    vector<string> vec;
+    short pos = 0;
+    string sWord;
+    while ((pos = Str.find(Delim)) != std::string::npos)
+    {
+        sWord = Str.substr(0, pos);
+        if (sWord != "")
+        {
+            vec.push_back(sWord);
+        }
+        //erase() until positon and move to next word.
+        Str.erase(0, pos + Delim.length());
+    }
+    if (Str != "")
+    {
+        vec.push_back(Str); // it add the last word of the string.
+    }
+    return vec;
+}
+
+
+struct sDate
+{
+    short Day;
+    short Month;
+    short Year;
+};
+
+
+sDate StringToDate(string DateStr)
+{
+    sDate Date;
+    vector<string> vDate;
+    vDate = SplitString(DateStr, "/");
+    Date.Day = stoi(vDate[0]);
+    Date.Month = stoi(vDate[1]);
+    Date.Year = stoi(vDate[2]);
+    return Date;
+}
+
+string DateToString(sDate Date)
+{
+    return to_string(Date.Day) + '/' + to_string(Date.Month) + '/' + to_string(Date.Year);
+}
+
+string ReplaceWorldInString(string Str, string StringToReplace, string ReplaceTo)
+{
+    short pos = Str.find(StringToReplace);
+    while (pos != std::string::npos)
+    {
+        Str = Str.replace(pos, StringToReplace.length(), ReplaceTo);
+        pos = Str.find(StringToReplace);
+    }
+    return Str;
+}
+
+
+string FormateDate(sDate Date, string DateFormat = "dd/mm/yyyy")
+{
+    string FormattedString = "";
+    FormattedString = ReplaceWorldInString(DateFormat, "dd", to_string(Date.Day));
+    FormattedString = ReplaceWorldInString(FormattedString, "mm", to_string(Date.Month));
+    FormattedString = ReplaceWorldInString(FormattedString, "yyyy", to_string(Date.Year));
+    return FormattedString;
+}
+
+int main()
+{
+    //cout << INT_MAX;
+    string DateString = ReadString("Please Enter Date dd/mm/yyyy? ");
+
+    sDate Date = StringToDate(DateString);
+
+
+    cout << "\n" << FormateDate(Date) << "\n\n";
+    cout << FormateDate(Date, "yyyy/dd/mm") << "\n\n";
+    cout << FormateDate(Date, "mm/dd/yyyy") << "\n\n";
+    cout << FormateDate(Date, "mm-dd-yyyy") << "\n\n";
+    cout << FormateDate(Date, "dd-mm-yyyy") << "\n\n";
+    cout << FormateDate(Date, "Day:dd, Month:mm, Year:yyyy") << "\n\n";
+
+    //cout << "\n\nYour Entered: " << DateToString(Date) << endl;
+    return 0;
+}
+//2147483647
+

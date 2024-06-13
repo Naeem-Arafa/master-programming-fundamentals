@@ -1,0 +1,14 @@
+#include <iostream>
+#include "clsDate.h"
+
+using namespace std;
+
+int main()
+
+{
+    clsDate Date(250, 2022);
+    Date.Print();
+    Date.PrintYearCalender();
+    
+    return 0;
+}

@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+
+int ReadNum(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num <= 0);
+
+	return Num;
+}
+
+int ReverseNumbers(int Num)
+{
+	int Number1 = 0;
+	while (Num != 0)
+	{
+		int rimainder = Num % 10;
+		Num = Num / 10;
+		Number1 = Number1 * 10 + rimainder;
+	}
+	return Number1;
+}
+
+void CheckPalindrome(int Num, int ReverseNum)
+{
+	if (Num == ReverseNum)
+		cout << "Yes , it is a Palindrome number. ";
+	else
+		cout << "No , it is Not a Palindrome number. ";
+}
+int main()
+{
+	int Number = ReadNum("Enter The Positive Number? ");
+	int ReverseNumber = ReverseNumbers(Number);
+	CheckPalindrome(Number, ReverseNumber);
+}

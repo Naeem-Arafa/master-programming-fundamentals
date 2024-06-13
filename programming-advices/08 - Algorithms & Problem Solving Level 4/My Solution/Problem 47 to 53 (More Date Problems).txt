@@ -1,0 +1,190 @@
+#pragma warning(disable : 4996)
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+bool IsLeapYear(short Year)
+{
+    return(Year % 400 == 0) || (Year % 4 == 0 && Year % 100 != 0);
+}
+
+int NumberOfDays(short Year)
+{
+    return (IsLeapYear(Year)) ? 366 : 365;
+}
+
+
+short NumberOfDaysInMonth(short Month, short Year)
+{
+    if (Month < 1 || Month > 12)
+    {
+        return 0;
+    }
+
+    return (Month == 2) ? ((IsLeapYear(Year)) ? 29 : 28) :
+        (Month <= 7 && Month % 2 != 0) || (7 < Month && Month % 2 == 0) ? 31 : 30;
+}
+
+bool IsLastDayInMonth(short Day, short Month, short Year)
+{
+    return (NumberOfDaysInMonth(Month, Year) == Day);
+}
+
+bool IsLastMonthInYear(short Month)
+{
+    return (Month == 12);
+}
+
+string DateName(short Day)
+{
+    string arr[7] = { "Sun", "Mon", "Tus", "Wed", "Thu", "Fri", "Sat" };
+    return arr[Day];
+}
+
+short DateOrder(short Day, short Month, short Year)
+{
+    short a = (14 - Month) / 12;
+    short y = Year - a;
+    short m = Month + 12 * a - 2;
+    short d = (Day + y + (y / 4) - (y / 100) + (y / 400) + (31 * m / 12)) % 7;
+    return d;
+}
+
+
+
+struct sDate
+{
+    short Day;
+    short Month;
+    short Year;
+};
+
+sDate IncreaseDateByOne(short Day, short Month, short Year)
+{
+    sDate Date;
+    Date.Day = Day;
+    Date.Month = Month;
+    Date.Year = Year;
+
+    if (IsLastDayInMonth(Date.Day, Date.Month, Date.Year))
+    {
+        if (IsLastMonthInYear(Date.Month))
+        {
+            Date.Year++;
+            Date.Month = 1;
+            Date.Day = 1;
+        }
+        else
+        {
+            Date.Month++;
+            Date.Day = 1;
+        }
+    }
+    else
+    {
+        Date.Day++;
+    }
+    return Date;
+}
+
+bool IsDate1LessThanDate2(sDate Date, sDate Date2)
+{
+    return (Date.Year < Date2.Year) ? true : (Date.Month < Date2.Month) ? true : (Date.Day < Date2.Day) ? true : false;
+}
+
+int GetDiffrenceInDays(sDate Date, sDate Date2, bool EndDay = false)
+{
+    int Days = 0;
+    while (IsDate1LessThanDate2(Date, Date2))
+    {
+        Days++;
+        Date = IncreaseDateByOne(Date.Day, Date.Month, Date.Year);
+    }
+    return (EndDay) ? ++Days : Days;
+}
+
+short DateOrder(sDate Date)
+{
+    return DateOrder(Date.Day, Date.Month, Date.Year);
+}
+
+bool IsEndOfWeek(sDate Date)
+{
+    return DateOrder(Date) == 6;
+}
+
+bool IsWeekEnd(sDate Date)
+{
+    short DayIndex = DateOrder(Date);
+    return (DayIndex == 5 || DayIndex == 6);
+}
+
+bool IsBusinessDay(sDate Date)
+{
+    return !IsWeekEnd(Date);
+}
+
+short DaysUntillEndOfWeek(sDate Date)
+{
+    return 6 - DateOrder(Date);
+}
+
+short DaysUntillEndOfMonth(sDate Date)
+{
+    return NumberOfDaysInMonth(Date.Month, Date.Year) - Date.Day;
+}
+
+short DaysUntillEndOfYear(sDate Date)
+{
+    sDate Date2;
+    Date2.Day = 31;
+    Date2.Month = 12;
+    Date2.Year = Date.Year;
+    return GetDiffrenceInDays(Date, Date2, true);
+}
+
+sDate GetSystemDate()
+{
+    sDate Date;
+    time_t t = time(0);
+    tm* now = localtime(&t);
+    Date.Day = now->tm_mday;
+    Date.Month = now->tm_mon + 1;
+    Date.Year = now->tm_year + 1900;
+    return Date;
+}
+
+int main()
+{
+    //cout << INT_MAX;
+    sDate Date = GetSystemDate();
+    
+    cout << "Today is: " << DateName(DateOrder(Date)) << ", " << Date.Day << '\\' << Date.Month << '\\' << Date.Year;
+    cout << "\nIs It End Of Week ? \n";
+    if (IsEndOfWeek(Date))
+        cout << "Yes, it is Saturday, it's of week.\n\n";
+    else
+        cout << "No it's not end of week.\n\n";
+    
+    cout << "Is It A Week End ? \n";
+    if (IsWeekEnd(Date))
+        cout << "Yes, it is a week end.\n\n";
+    else
+        cout << "No, today is " << DateName(DateOrder(Date)) << " not a week end.\n\n";
+    
+    cout << "Is It Business Day?\n";
+    if (IsBusinessDay(Date))
+        cout << "Yes, it is a business day.\n\n";
+    else
+        cout << "No, it is not business day.\n\n";
+
+    cout << "Days untill end of week : " << DaysUntillEndOfWeek(Date) << " Day(s).\n";
+    cout << "Days untill end of month : " << DaysUntillEndOfMonth(Date) << " Day(s).\n";
+    cout << "Days untill end of year : " << DaysUntillEndOfYear(Date) << " Day(s).\n";
+    return 0;
+}
+//2147483647
+
+

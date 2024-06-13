@@ -1,0 +1,73 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+short ReadNum(string massage)
+{
+	short Num;
+	do
+	{
+		cout << massage << " ";
+		cin >> Num;
+	} while (Num < 0);
+
+	return Num;
+}
+
+short ReadNum(string massage, short From, short To)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < From || Num > To);
+
+    return Num;
+}
+
+bool IsLeapYear(short Year)
+{
+	return(Year % 400 == 0 ) || (Year % 4 == 0 && Year % 100 != 0);
+}
+
+short NumberOfDaysInMonth(short Month, short Year)
+{
+	if (Month < 1 || Month > 12)
+	{
+		return 0;
+	}
+
+    return (Month == 2) ?( (IsLeapYear(Year)) ? 29 : 28) : 
+    (Month <= 7 && Month % 2 != 0) || (7 < Month && Month % 2 == 0) ? 31 : 30; 	
+}
+short NumberOfHoursInMonth(short Month, short Year)
+{
+	return NumberOfDaysInMonth(Month, Year)*24;
+}
+int NumberOfMinutesInMonth(short Month, short Year)
+{
+	return NumberOfHoursInMonth(Month, Year)*60;
+}
+int NumberOfSecondsInMonth(short Month, short Year)
+{
+	return NumberOfMinutesInMonth(Month, Year)*60;
+}
+
+int main()
+{
+	//cout << INT_MAX;
+    
+	short Year = ReadNum("Enter A Year? ");
+	short Month = ReadNum("Enter A Month? ", 1, 12);
+	cout << "\nNumber of days in Month [" << Month << "] is " << NumberOfDaysInMonth(Month, Year);
+	cout << "\nNumber of hours in Month [" << Month << "] is " << NumberOfHoursInMonth(Month, Year);
+	cout << "\nNumber of minutes in Month [" << Month << "] is " << NumberOfMinutesInMonth(Month, Year);
+	cout << "\nNumber of seconds in Month [" << Month << "] is " << NumberOfSecondsInMonth(Month, Year);
+
+	return 0;
+}
+//2147483647
+
+

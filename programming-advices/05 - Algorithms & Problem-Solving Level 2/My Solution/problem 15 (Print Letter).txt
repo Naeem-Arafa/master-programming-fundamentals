@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+
+int ReadNum(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num <= 0);
+
+	return Num;
+}
+
+void PrintLetter(int Num)
+{
+	int Counter = 0;
+	for (int i = 65; i <= 64 + Num; i++)
+	{
+
+		for (int j = 65; j <= i; j++)
+		{
+			cout << char(i);
+		}
+		cout << endl;
+	}
+}
+
+int main()
+{
+	PrintLetter(ReadNum("Enter The Positive Number? "));
+}

@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+short ReadNum(string massage)
+{
+	short Num;
+	do
+	{
+		cout << massage << " ";
+		cin >> Num;
+	} while (Num < 0);
+
+	return Num;
+}
+
+bool IsLeapYear(short Year)
+{
+	return(Year % 400 == 0 ) || (Year % 4 == 0 && Year % 100 != 0);
+}
+
+int NumberOfDays(short Year)
+{
+	return (IsLeapYear(Year)) ? 366 : 365;
+}
+int NumberOfHours(short Year)
+{
+	return NumberOfDays(Year)*24;
+}
+int NumberOfMinutes(short Year)
+{
+	return NumberOfHours(Year)*60;
+}
+int NumberOfSeconds(short Year)
+{
+	return NumberOfMinutes(Year)*60;
+}
+
+int main()
+{
+	//cout << INT_MAX;
+	short Year = ReadNum("Enter A Year? ");
+	cout << "\nNumber of days in year [" << Year << "] is " << NumberOfDays(Year);
+	cout << "\nNumber of hours in year [" << Year << "] is " << NumberOfHours(Year);
+	cout << "\nNumber of minutes in year [" << Year << "] is " << NumberOfMinutes(Year);
+	cout << "\nNumber of seconds in year [" << Year << "] is " << NumberOfSeconds(Year);
+
+	return 0;
+}
+//2147483647
+
+

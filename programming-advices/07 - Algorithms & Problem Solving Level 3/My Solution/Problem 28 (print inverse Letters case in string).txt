@@ -1,0 +1,42 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <string>
+
+#define ll long long
+using namespace std;
+
+string ReadString()
+{
+	string str = " ";
+	getline(cin, str);
+	return str;
+}
+
+char InverseLetterCase(char str)
+{
+	return isupper(str) ? tolower(str) : toupper(str);
+}
+
+
+string InverseLetterCaseInString(string str)
+{
+	string res = " ";
+	for (int i = 0; i < str.size(); i++)
+	{
+		res += InverseLetterCase(str[i]);
+	}
+	return res;
+}
+
+int main()
+{
+	string str = ReadString();
+	cout << "\nString After Inversing All Letters Case:\n" << InverseLetterCaseInString(str) << endl;
+	
+	
+	
+}
+
+

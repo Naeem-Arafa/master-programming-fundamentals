@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+int RandomNumber(int From, int To)
+{
+	int randomNum = rand() % (To - From + 1) + From;//this formola to make the random only in range
+	return randomNum;
+}
+
+
+void ReadArandomArray(int arr[100], int& arrLength)
+{
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(1, 100);
+	}
+	cout << endl;
+}
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+	cout << "\n";
+}
+
+int SumNumberInRandomArray(int arr[100], int arrLength)
+{
+	int SumNum = 0;
+	for (int i = 0; i < arrLength; i++)
+	{
+		SumNum += arr[i];
+	}
+	cout << endl;
+	return SumNum;
+}
+
+int AverageNumberInRandomArray(int SumNumInArray, int arrLength)
+{
+	return int(SumNumInArray / arrLength);
+}
+
+int main()
+{
+	srand((unsigned)time(NULL));
+	int arr[100], arrLength;
+	ReadArandomArray(arr, arrLength);
+	cout << "Array Element: ";
+	PrintArray(arr, arrLength);
+	cout << "Average of all number is : " << AverageNumberInRandomArray(SumNumberInRandomArray(arr, arrLength), arrLength);
+	
+}

@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include "clsString.h"
+using namespace std;
+
+
+
+int main()
+{
+	
+	clsString Str1("Naeem Monir Arafa");
+	cout << Str1.InverseLetterCaseInString() << endl;
+	cout << clsString::InverseLetterCaseInString("Wezo") << endl;
+	cout << Str1.ReverseWorldInString() << endl;
+
+	clsString Str2("Naeem monir");
+	cout << Str2.CountVowelChar();
+	
+	return 0;
+}
+
+
+
+
+

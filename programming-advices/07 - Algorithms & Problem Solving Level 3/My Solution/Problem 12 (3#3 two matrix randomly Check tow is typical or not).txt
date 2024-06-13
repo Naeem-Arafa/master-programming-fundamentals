@@ -1,0 +1,81 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+//#include <string>
+
+#define ll long long
+using namespace std;
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+}
+
+void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			arr[i][j] = RandomNumber(1, 10);
+		}
+	}
+}
+
+bool CheckTypical(int arr[3][3], int arr2[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			if (arr[i][j] != arr2[i][j])
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+void PrintMatrix(int arr[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			printf(" %0*d   ", 2, arr[i][j]);
+		}
+		cout << '\n';
+	}
+}
+
+int main()
+{
+	//Seeds the random number generator in C++, called only once
+	srand((unsigned)time(NULL));
+	int arr[3][3];
+	int arr2[3][3];
+	FillMatrixWithRandomNumbers(arr, 3, 3);
+	FillMatrixWithRandomNumbers(arr2, 3, 3);
+	cout << "The following is a 3x3 random matrix 1:\n";
+	PrintMatrix(arr, 3, 3);
+	cout << "The following is a 3x3 random matrix 2:\n";
+	PrintMatrix(arr2, 3, 3);
+	if (CheckTypical(arr, arr2,3, 3))
+	{
+		cout << "\nYes: matrices are typical.\n";
+	}
+	else
+	{
+		cout << "\nNo: matrices are not typical.\n";
+	}
+	
+	
+
+}
+
+
+
+

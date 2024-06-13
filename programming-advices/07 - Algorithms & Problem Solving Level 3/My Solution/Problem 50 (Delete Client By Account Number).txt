@@ -1,0 +1,379 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <iomanip>
+
+
+
+using namespace std;
+const string ClientsFileName = "Clients.txt";
+
+string ReadString()
+{
+	string str = " ";
+	getline(cin, str);
+	return str;
+}
+
+
+struct sClient
+{
+	string AcountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AcountBalance;
+	bool CheckDelete = false;
+};
+
+vector<string> SplitString(string Str, string Delim)
+{
+	vector<string> vec;
+	short pos = 0;
+	string sWord;
+	while ((pos = Str.find(Delim)) != std::string::npos)
+	{
+		sWord = Str.substr(0, pos);
+		if (sWord != "")
+		{
+			vec.push_back(sWord);
+		}
+		//erase() until positon and move to next word.
+		Str.erase(0, pos + Delim.length());
+	}
+	if (Str != "")
+	{
+		vec.push_back(Str); // it add the last word of the string.
+	}
+	return vec;
+}
+
+sClient ConvertLineToRecord(string Line, string Sep = "#//#")
+{
+	sClient Client;
+	vector<string>vClientData;
+	vClientData = SplitString(Line, Sep);
+
+	Client.AcountNumber = vClientData[0];
+	Client.PinCode = vClientData[1];
+	Client.Name = vClientData[2];
+	Client.Phone = vClientData[3];
+	Client.AcountBalance = stod(vClientData[4]); // casting from string to double
+	return Client;
+}
+
+vector<sClient> LoadClientDataFromFile(string FileName)
+{
+	vector<sClient> vClients;
+	fstream MyFile;
+	MyFile.open(FileName, ios::in);//read mode.
+
+	if (MyFile.is_open())
+	{
+		string Line;
+		sClient Client;
+		while (getline(MyFile, Line))
+		{
+			Client = ConvertLineToRecord(Line);
+			vClients.push_back(Client);
+		}
+		MyFile.close();
+	}
+	return vClients;
+}
+
+void PrintClientRecord(sClient Client)
+{
+	cout << "\nThe following are the client details:\n";
+	cout << "\nAcountNumber: "<< Client.AcountNumber;
+	cout << "\nPinCode: " << Client.PinCode;
+	cout << "\nName: " << Client.Name;
+	cout << "\nPhone: " << Client.Phone;
+	cout << "\nAcountBalance: " << Client.AcountBalance;
+}
+
+
+bool IsAccountNumExist(sClient& Client, string AccountNumber, vector<sClient> vClients)
+{
+
+	for (sClient Cl : vClients)
+	{
+		if (Cl.AcountNumber == AccountNumber)
+		{
+			Client = Cl;
+			return true;
+		}
+		
+	}
+	return false;
+}
+
+
+bool CheckToDelete()
+{
+	char Check = 'y';
+	cout << "Are you sure you want to delete this client? y/n? ";
+	cin >> Check;
+	if (toupper(Check) == 'Y')
+	{
+		return true;
+	}
+	return false;
+}
+
+bool MarkAccountForDelete(string AccoutNumber, vector<sClient>& vClients)
+{
+	for (sClient& Cl : vClients)
+	{
+		if (Cl.AcountNumber == AccoutNumber)
+		{
+			Cl.CheckDelete = true;
+			return true;
+		}
+	}
+	return false;
+}
+
+string ConvertRecordToLine(sClient Client, string Sep = "#//#")
+{
+	string stClientRecord = "";
+	stClientRecord += Client.AcountNumber + Sep;
+	stClientRecord += Client.PinCode + Sep;
+	stClientRecord += Client.Name + Sep;
+	stClientRecord += Client.Phone + Sep;
+	stClientRecord += to_string(Client.AcountBalance); // casting from double to string
+	return stClientRecord;
+}
+
+
+
+vector<sClient> SaveClientDataToFile(string FileName, vector<sClient> vClients)
+{
+	fstream MyFile;
+	MyFile.open(FileName, ios::out);//write mode || overwrite.
+
+	if (MyFile.is_open())
+	{
+		string Line;
+		for (sClient Cl : vClients)
+		{
+			if (Cl.CheckDelete == false)
+			{
+				Line = ConvertRecordToLine(Cl);
+				MyFile << Line << endl;
+			}
+		}
+		MyFile.close();
+	}
+	return vClients;
+}
+
+
+
+
+bool DeleteAccountNumber(string AccountNumber, vector<sClient>& vClients)
+{
+	sClient Client;
+	if (IsAccountNumExist(Client, AccountNumber, vClients))
+	{
+		PrintClientRecord(Client);
+		if (CheckToDelete())
+		{
+			MarkAccountForDelete(AccountNumber, vClients);
+			SaveClientDataToFile(ClientsFileName, vClients);
+			vClients = LoadClientDataFromFile(ClientsFileName);
+			cout << "Clients Deleted Successfully";
+			return true;
+		}
+	}
+	else
+	{
+		cout << "\nClient with account number (" << AccountNumber << ") is not found.";
+		return false;
+	}
+}
+
+
+int main()
+{
+	vector<sClient> vClients = LoadClientDataFromFile(ClientsFileName);
+	cout << "Please enter AccountNumber? ";
+	string AccountNumber = ReadString();
+	DeleteAccountNumber(AccountNumber, vClients);
+
+}
+
+
+
+///////////////////////////Another Way /////////////////
+
+#include<iostream> 
+#include<iomanip> 
+#include<vector> 
+#include<fstream>
+#include<string>
+
+using namespace std;
+
+const string FileName = "Clients.txt";
+
+struct sClient
+{
+	string AccountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AccountBalance;
+};
+
+vector<string> SplitString(string Str, string Delim)
+{
+	vector<string> vec;
+	short pos = 0;
+	string sWord;
+	while ((pos = Str.find(Delim)) != std::string::npos)
+	{
+		sWord = Str.substr(0, pos);
+		if (sWord != "")
+		{
+			vec.push_back(sWord);
+		}
+		//erase() until positon and move to next word.
+		Str.erase(0, pos + Delim.length());
+	}
+	if (Str != "")
+	{
+		vec.push_back(Str); // it add the last word of the string.
+	}
+	return vec;
+}
+
+sClient ConvertLineToRecord(string Line, string Sep = "#//#")
+{
+	sClient Client;
+	vector<string>vClientData;
+	vClientData = SplitString(Line, Sep);
+
+	Client.AccountNumber = vClientData[0];
+	Client.PinCode = vClientData[1];
+	Client.Name = vClientData[2];
+	Client.Phone = vClientData[3];
+	Client.AccountBalance = stod(vClientData[4]); // casting from string to double
+	return Client;
+}
+
+vector<sClient> LoadClientDataFromFile(string FileName)
+{
+	vector<sClient> vClients;
+	fstream MyFile;
+	MyFile.open(FileName, ios::in);//read mode.
+
+	if (MyFile.is_open())
+	{
+		string Line;
+		sClient Client;
+		while (getline(MyFile, Line))
+		{
+			Client = ConvertLineToRecord(Line);
+			vClients.push_back(Client);
+		}
+		MyFile.close();
+	}
+	return vClients;
+}
+
+
+void PrintData(sClient Client)
+{
+	cout << "The following are the client details:\n\n" << "Account Number " << ": " << Client.AccountNumber << endl;
+	cout << "Pin Code       " << ": " << Client.PinCode << endl;
+	cout << "Name           " << ": " << Client.Name << endl;
+	cout << "Phone          " << ": " << Client.Phone << endl;
+	cout << "Account Balance" << ": " << Client.AccountBalance << endl;
+}
+
+bool FindClientByNumber(sClient& Client, string AccountNumber)
+{
+	vector <sClient> vClients = LoadClientDataFromFile(FileName);
+	for (sClient Cliente : vClients)
+	{
+		if (Cliente.AccountNumber == AccountNumber)
+		{
+			Client = Cliente;
+			return true;
+		}
+		cout << endl;
+	}
+	return false;
+}
+
+string ConvertRecordToLine(sClient Client, string Seperator = "#//#")
+{
+	string stClientRecord = "";
+	stClientRecord += Client.AccountNumber + Seperator;
+	stClientRecord += Client.PinCode + Seperator;
+	stClientRecord += Client.Name + Seperator;
+	stClientRecord += Client.Phone + Seperator;
+	stClientRecord += to_string(Client.AccountBalance);
+
+	return stClientRecord;
+}
+
+string ReadClientAccountNumber()
+{
+	string AccountNumber = "";
+	cout << "\nPlease enter AccountNumber You want to delete? ";
+	cin >> AccountNumber;
+
+	return AccountNumber;
+}
+
+vector <sClient> DeleteClient(vector <sClient> Origin, string AccountNumber)
+{
+	fstream File;
+	File.open(FileName, ios::out);
+	sClient Client;
+	vector <sClient> vClients;
+
+	if (File.is_open())
+	{
+		for (sClient Cliente : Origin)
+		{
+			if (Cliente.AccountNumber == AccountNumber)
+			{
+				continue;
+			}
+			else
+				File << ConvertRecordToLine(Cliente);
+		}
+
+		File.close();
+	}
+	return vClients;
+}
+
+int main()
+{
+	sClient Client;
+	char to = 'e';
+	string AccountNumber = ReadClientAccountNumber();
+	if (FindClientByNumber(Client, AccountNumber))
+	{
+		PrintData(Client);
+		cout << "Are you sure to delete this Client? Y/N?";
+		cin >> to;
+		if (toupper(to) == 'Y')
+		{
+			DeleteClient(LoadClientDataFromFile(FileName), AccountNumber);
+			cout << "Client Deleted Successfully.\n";
+		}
+		
+	}
+	else
+	{
+		cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
+	}
+
+	system("pause>0");
+}

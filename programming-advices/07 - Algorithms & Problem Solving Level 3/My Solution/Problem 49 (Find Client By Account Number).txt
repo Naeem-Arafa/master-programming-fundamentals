@@ -1,0 +1,134 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <iomanip>
+
+
+
+using namespace std;
+const string ClientsFileName = "Clients.txt";
+
+string ReadString()
+{
+	string str = " ";
+	getline(cin, str);
+	return str;
+}
+
+
+struct sClient
+{
+	string AcountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AcountBalance;
+};
+
+vector<string> SplitString(string Str, string Delim)
+{
+	vector<string> vec;
+	short pos = 0;
+	string sWord;
+	while ((pos = Str.find(Delim)) != std::string::npos)
+	{
+		sWord = Str.substr(0, pos);
+		if (sWord != "")
+		{
+			vec.push_back(sWord);
+		}
+		//erase() until positon and move to next word.
+		Str.erase(0, pos + Delim.length());
+	}
+	if (Str != "")
+	{
+		vec.push_back(Str); // it add the last word of the string.
+	}
+	return vec;
+}
+
+sClient ConvertLineToRecord(string Line, string Sep = "#//#")
+{
+	sClient Client;
+	vector<string>vClientData;
+	vClientData = SplitString(Line, Sep);
+
+	Client.AcountNumber = vClientData[0];
+	Client.PinCode = vClientData[1];
+	Client.Name = vClientData[2];
+	Client.Phone = vClientData[3];
+	Client.AcountBalance = stod(vClientData[4]); // casting from string to double
+	return Client;
+}
+
+vector<sClient> LoadClientDataFromFile(string FileName)
+{
+	vector<sClient> vClients;
+	fstream MyFile;
+	MyFile.open(FileName, ios::in);//read mode.
+
+	if (MyFile.is_open())
+	{
+		string Line;
+		sClient Client;
+		while (getline(MyFile, Line))
+		{
+			Client = ConvertLineToRecord(Line);
+			vClients.push_back(Client);
+		}
+		MyFile.close();
+	}
+	return vClients;
+}
+
+void PrintClientRecord(sClient Client)
+{
+	cout << "\nThe following are the client details:\n";
+	cout << "\nAcountNumber: "<< Client.AcountNumber;
+	cout << "\nPinCode: " << Client.PinCode;
+	cout << "\nName: " << Client.Name;
+	cout << "\nPhone: " << Client.Phone;
+	cout << "\nAcountBalance: " << Client.AcountBalance;
+}
+
+
+bool IsAccountNumExist(sClient& Client, string AccountNumber)
+{
+	vector<sClient> vClients = LoadClientDataFromFile(ClientsFileName);
+
+	for (sClient Cl : vClients)
+	{
+		if (Cl.AcountNumber == AccountNumber)
+		{
+			Client = Cl;
+			return true;
+		}
+		
+	}
+	return false;
+}
+
+
+
+
+
+
+
+int main()
+{
+	cout << "Please enter AccountNumber? ";
+	string AccountNumber = ReadString();
+	sClient Client;
+	if (IsAccountNumExist(Client, AccountNumber))
+	{
+		PrintClientRecord(Client);
+	}
+	else
+	{
+		cout << "\nClient with account number (" << AccountNumber << ") is not found.";
+	}
+
+
+
+}

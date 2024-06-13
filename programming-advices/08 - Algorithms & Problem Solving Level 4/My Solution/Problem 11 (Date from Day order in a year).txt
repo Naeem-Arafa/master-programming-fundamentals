@@ -1,0 +1,84 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+short ReadNum(string massage)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < 0);
+
+    return Num;
+}
+
+short ReadNum(string massage, short From, short To)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < From || Num > To);
+
+    return Num;
+}
+
+bool IsLeapYear(short Year)
+{
+    return(Year % 400 == 0) || (Year % 4 == 0 && Year % 100 != 0);
+}
+
+short NumberOfDaysInMonth(short Month, short Year)
+{
+    if (Month < 1 || Month > 12)
+    {
+        return 0;
+    }
+
+    return (Month == 2) ? ((IsLeapYear(Year)) ? 29 : 28) :
+        (Month <= 7 && Month % 2 != 0) || (7 < Month && Month % 2 == 0) ? 31 : 30;
+}
+
+
+short NumberOfDays(short Day, short Month, short Year)
+{
+    short Days = 0;
+    for(short i = 1; i < Month; i++)
+    {
+        Days += NumberOfDaysInMonth(i, Year);
+    }
+    return Days + Day;
+}
+
+pair<short, short> DateByNumberOfDays(short Year, short NumberOfDays)
+{
+    int Month = 1;
+    while (NumberOfDays > NumberOfDaysInMonth(Month, Year))
+    {
+        NumberOfDays -= NumberOfDaysInMonth(Month, Year);
+        Month++;
+    }
+    return make_pair(Month, NumberOfDays);
+}
+
+int main()
+{
+    //cout << INT_MAX;
+	short Day = ReadNum("Enter A Day? ", 1, 31);
+	short Month = ReadNum("Enter A Month? ", 1, 12);
+    short Year = ReadNum("Enter A Year? ");
+
+    cout << "Number of days from the beginning of the year is " << NumberOfDays(Day, Month, Year);
+
+    pair<short, short> date = DateByNumberOfDays(Year, NumberOfDays(Day, Month, Year));
+    cout << "\nDate for [" << NumberOfDays(Day, Month, Year) << "] is: " << date.second << '\\' << date.first << '\\' << Year;
+    return 0;
+}
+//2147483647
+
+

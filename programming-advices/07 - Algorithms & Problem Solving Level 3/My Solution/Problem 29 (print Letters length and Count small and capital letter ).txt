@@ -1,0 +1,56 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <string>
+
+#define ll long long
+using namespace std;
+
+string ReadString()
+{
+	string str = " ";
+	getline(cin, str);
+	return str;
+}
+
+short CountUpperChar(string str)
+{
+	short Count = 0;
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (isupper(str[i]))
+		{
+			Count++;
+		}
+	}
+	return Count;
+}
+
+short CountLowerChar(string str)
+{
+	short Count = 0;
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (islower(str[i]))
+		{
+			Count++;
+		}
+	}
+	return Count;
+}
+
+
+int main()
+{
+	string str = ReadString();
+	cout << "\nString Length = " << str.length() << endl;
+	cout << "\nCapital Letter = " << CountUpperChar(str) << endl;
+	cout << "\nSmall Length = " << CountLowerChar(str) << endl;
+
+	
+	
+	
+}
+
+

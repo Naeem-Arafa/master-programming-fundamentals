@@ -1,0 +1,63 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+
+int ReadNum(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num <= 0);
+
+	return Num;
+}
+
+int SumAllDivisors(int Num)
+{
+	int Sum = 0;
+	for (int i = 1; i <= round(Num / 2); i++)
+	{
+		if (Num % i == 0)
+			Sum += i;
+	}
+
+	return Sum;
+}
+
+void CheckPerfect(int Num, int Sum)
+{
+	if (Num == Sum)
+		cout << Num << " is Perfect";
+	else
+		cout << Num << " is not Perfect";
+}
+
+
+int main()
+{
+	int N = ReadNum("Enter The Positive Number ?");
+	CheckPerfect(N, SumAllDivisors(N));
+}
+
+
+
+
+
+
+For Profetinal Editting: 
+################# You Can bool Function another SumDivisors And CheckPrime####################
+
+bool isPerfectNumber(int Number) 
+{ 
+ int Sum = 0; 
+ for (int i = 1; i < Number; i++) 
+ { 
+ if (Number % i == 0) 
+ Sum += i; 
+ } 
+ return Number == Sum; //To Check Perfect or not
+}

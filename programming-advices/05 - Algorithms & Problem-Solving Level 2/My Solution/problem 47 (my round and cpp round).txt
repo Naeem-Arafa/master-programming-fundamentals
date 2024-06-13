@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+float ReadNumber(string massage)
+{
+	float Num;
+	cout << massage << "\n";
+	cin >> Num;	
+	return Num;
+}
+
+float MyRound(float Num)
+{
+	int IntNum = int(Num);
+	if (Num >= 0)
+	{
+		float Fraction = Num - IntNum;
+		if (Fraction >= 0.5)
+			return IntNum + 1;
+		else
+			return IntNum;
+	}
+	else
+	{
+		float Fraction = -Num + IntNum;
+		if (Fraction >= 0.5)
+			return IntNum - 1;
+		else
+			return IntNum;
+	}
+	
+}
+
+int main()
+{
+	float Num = ReadNumber("Pleaze enter the num? ");
+	cout << "My round result: " << MyRound(Num) << endl;
+	cout << "C++ round result: " << round(Num) << endl;
+
+	return 0;
+}

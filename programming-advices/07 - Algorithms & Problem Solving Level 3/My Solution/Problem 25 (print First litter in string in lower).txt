@@ -1,0 +1,39 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <string>
+
+#define ll long long
+using namespace std;
+
+string ReadString()
+{
+	string str = " ";
+	getline(cin, str);
+	return str;
+}
+
+void PrintFirstLettersInStringInLower(string str)
+{
+	str[0] = tolower(str[0]);
+	cout << str[0] << endl;
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (i != str.size() - 1  && str[i] == ' ')
+		{
+			str[i + 1] = tolower(str[i + 1]);
+			cout << str[i + 1] << '\n';
+		}
+	}
+}
+
+
+int main()
+{
+	PrintFirstLettersInStringInLower(ReadString());
+}
+
+
+
+

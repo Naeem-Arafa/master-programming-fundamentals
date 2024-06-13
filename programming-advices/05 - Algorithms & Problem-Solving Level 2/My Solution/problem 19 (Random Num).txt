@@ -1,0 +1,19 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+int RandomNumber(int From, int To)
+{
+	int randomNum = rand() % (To - From + 1) + From;//this formola to make the random only in range
+	return randomNum;
+}
+
+int main()
+{
+	srand((unsigned)time(NULL));//seeds the rendom number generator in c++, called only once.
+	cout << RandomNumber(20, 50) << endl;
+	cout << RandomNumber(20, 50) << endl;
+	cout << RandomNumber(20, 50) << endl;
+
+}

@@ -1,0 +1,98 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+
+using namespace std;
+
+string ReadString()
+{
+	string S1;
+	cout << "Please Enter Your String?\n";
+	getline(cin, S1);
+	return S1;
+}
+
+vector<string> SplitString(string Str, string Delim)
+{
+	vector<string> vec;
+	short pos = 0;
+	string sWord;
+	while ((pos = Str.find(Delim)) != std::string::npos)
+	{
+		sWord = Str.substr(0, pos);
+		if (sWord != "")
+		{
+			vec.push_back(sWord);
+		}
+		//erase() until positon and move to next word.
+		Str.erase(0, pos + Delim.length());
+	}
+	if (Str != "")
+	{
+		vec.push_back(Str); // it add the last word of the string.
+	}
+	return vec;
+}
+
+string JoinString(vector<string> vec, string Delim)
+{
+	string Str = "";
+	vec.pop_back();
+	for (string& s : vec)
+	{
+		Str = Str + s + Delim;
+	}
+	return Str.substr(0, Str.length() - Delim.length());
+}
+
+string LowerAllString(string Str)
+{
+	for (short i = 0; i < Str.length(); i++)
+	{
+		Str[i] = tolower(Str[i]);
+	}
+	return Str;
+}
+
+
+string ReplaceWorldInString(string Str, string StringToReplace, string ReplaceTo, bool check = true)
+{
+	vector<string> vec = SplitString(Str, " ");
+	for (string& s : vec)
+	{
+		if (check)
+		{
+			if (s == StringToReplace)
+			{
+				s = ReplaceTo;
+			}
+		}
+		else
+		{
+			if (LowerAllString(s) == LowerAllString(StringToReplace))
+			{
+				s = ReplaceTo;
+			}
+		}
+	}
+	return JoinString(vec, " ");
+	
+}
+
+
+
+int main()
+{
+	string Str = ReadString();
+	string StringToReplace = ReadString();
+	string ReplaceTo = ReadString();
+
+	cout << "\nOriginal String: " << Str;
+	cout << "\nReplace with match case: ";
+	cout << ReplaceWorldInString(Str, StringToReplace, ReplaceTo);
+
+	cout << "\nReplace with don't match case: ";
+	cout << ReplaceWorldInString(Str, StringToReplace, ReplaceTo, false);
+
+}

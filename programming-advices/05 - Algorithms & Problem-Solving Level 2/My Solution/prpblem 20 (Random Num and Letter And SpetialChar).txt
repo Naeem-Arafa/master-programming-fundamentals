@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+int RandomNumber(int From, int To)
+{
+	int randomNum = rand() % (To - From + 1) + From;//this formola to make the random only in range
+	return randomNum;
+}
+
+enum enCharType {SmallLetter = 1, CapitalLetter = 2, SpecialCharacter = 3, Digit = 4};
+
+char GitRandomCharacter(enCharType CharType)
+{
+	switch (CharType)
+	{
+	case SmallLetter:
+		return RandomNumber(char(97), char(122));
+	case CapitalLetter:
+		return RandomNumber(char(65), char(90));
+	case SpecialCharacter:
+		return RandomNumber(char(33), char(47));
+	case Digit:
+		return RandomNumber(char(48), char(57));
+	default:
+		break;
+	}
+}
+
+int main()
+{
+	srand((unsigned)time(NULL));//seeds the rendom number generator in c++, called only once.
+	cout << GitRandomCharacter(enCharType::SmallLetter) << endl;
+	cout << GitRandomCharacter(enCharType::CapitalLetter) << endl;
+	cout << GitRandomCharacter(enCharType::SpecialCharacter) << endl;
+	cout << GitRandomCharacter(enCharType::Digit) << endl;
+
+}

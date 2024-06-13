@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+short ReadNum(string massage)
+{
+	short Num;
+	do
+	{
+		cout << massage << " ";
+		cin >> Num;
+	} while (Num < 0);
+
+	return Num;
+}
+
+short ReadNum(string massage, short From, short To)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < From || Num > To);
+
+    return Num;
+}
+
+string Date(short Day, short Month, short Year)
+{
+    return to_string(Day) + '\\' + to_string(Month) + '\\' + to_string(Year);
+}
+
+short DateOrder(short Day, short Month, short Year)
+{
+    short a = (14 - Month)/12;
+    short y = Year - a;
+    short m = Month + 12 * a - 2;
+    short d = (Day + y + (y/4) - (y/100) + (y/400) + (31*m/12)) % 7;
+    return d; 
+} 
+
+string DateName(short Day)
+{
+    string arr[7] = {"Sun", "Mon", "Tus", "Wed", "Thu", "Fri", "Sat"};
+    return arr[Day]; 
+} 
+
+int main()
+{
+	//cout << INT_MAX;
+    
+	short Year = ReadNum("Enter A Year? ");
+	short Month = ReadNum("Enter A Month? ", 1, 12);
+	short Day = ReadNum("Enter A Day? ", 1, 31);
+	cout << "\nDate         : " << Date(Day, Month, Year);
+	cout << "\nDay Order    : " << DateOrder(Day, Month, Year);
+	cout << "\nDay Name     : " << DateName(DateOrder(Day, Month, Year));
+
+	return 0;
+}
+//2147483647
+
+

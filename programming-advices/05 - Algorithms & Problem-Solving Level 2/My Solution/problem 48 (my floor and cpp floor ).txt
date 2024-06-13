@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+float ReadNumber(string massage)
+{
+	float Num;
+	cout << massage << "\n";
+	cin >> Num;	
+	return Num;
+}
+
+float MyFloor(float Num)
+{
+	if (Num == int(Num))
+	{
+		if (Num >= 0)
+			return int(Num);
+		else
+			return int(Num);
+	}
+	else
+	{
+		if (Num >= 0)
+			return int(Num);
+		else
+			return int(Num) - 1;
+	}
+	
+}
+
+int main()
+{
+	float Num = ReadNumber("Pleaze enter the num? ");
+	cout << "My floor result: " << MyFloor(Num) << endl;
+	cout << "C++ floor result: " << floor(Num) << endl;
+	return 0;
+}

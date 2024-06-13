@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+
+using namespace std;
+
+string ReadString()
+{
+	string S1;
+	cout << "Please Enter Your String?\n";
+	getline(cin, S1);
+	return S1;
+}
+
+
+string ReplaceWorldInString(string Str, string StringToReplace, string ReplaceTo)
+{
+	short pos = Str.find(StringToReplace);
+	while (pos != std::string::npos)
+	{
+		Str = Str.replace(pos, StringToReplace.length(), ReplaceTo);
+		pos = Str.find(StringToReplace);
+	}
+	return Str;
+}
+
+
+
+int main()
+{
+	string Str = ReadString();
+	string StringToReplace = ReadString();
+	string ReplaceTo = ReadString();
+
+	cout << "\nOriginal String: " << Str;
+	cout << "\nString after Replace world: ";
+	cout << '\n' << ReplaceWorldInString(Str, StringToReplace, ReplaceTo);
+
+}

@@ -1,0 +1,105 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+short ReadNum(string massage)
+{
+	short Num;
+	do
+	{
+		cout << massage << " ";
+		cin >> Num;
+	} while (Num < 0);
+
+	return Num;
+}
+
+bool IsLeapYear(short Year)
+{
+	if (Year % 400 == 0 || Year % 4 == 0 && Year % 100 != 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+int main()
+{
+	//cout << INT_MAX;
+	short Year = ReadNum("Enter A Year? ");
+	if (IsLeapYear(Year))
+	{
+		cout << "\nYes, Year [" << Year << "] is a leap year.\n";
+	}
+	else
+	{
+		cout << "\nNo, Year [" << Year << "] is not a leap year.\n";
+	}
+
+	return 0;
+}
+//2147483647
+
+
+//////////////////Another Way //////////////////////////
+
+
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+short ReadNum(string massage)
+{
+	short Num;
+	do
+	{
+		cout << massage << " ";
+		cin >> Num;
+	} while (Num < 0);
+
+	return Num;
+}
+
+bool IsLeapYear(short Year)
+{
+	if (Year % 400 == 0)
+	{
+		return true;
+	}
+	else if (Year % 100 == 0)
+	{
+		return false;
+	}
+	else if (Year % 4 == 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+int main()
+{
+	//cout << INT_MAX;
+	short Year = ReadNum("Enter A Year? ");
+	if (IsLeapYear(Year))
+	{
+		cout << "\nYes, Year [" << Year << "] is a leap year.\n";
+	}
+	else
+	{
+		cout << "\nNo, Year [" << Year << "] is not a leap year.\n";
+	}
+
+	return 0;
+}
+//2147483647
+
+

@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+string ReadText()
+{
+	string Text;
+	cout << "Please enter Text? \n";
+	getline(cin, Text);
+
+	return Text;
+}
+
+string EncryptText(string Text, short Encryptionkey)
+{
+	for (int i = 0; i <= Text.length(); i++)
+	{
+		Text[i] = char((int)Text[i] + Encryptionkey);
+	}
+	return Text;
+}
+
+string DecryptText(string Text, short Encryptionkey)
+{
+	for (int i = 0; i <= Text.length(); i++)
+	{
+		Text[i] = char((int)Text[i] - Encryptionkey);
+	}
+	return Text;
+}
+
+
+int main()
+{
+	const short Encryptionkey = 2; //This is the key.
+
+	string Text = ReadText();
+	string TextAfterEncryption = EncryptText(Text, Encryptionkey);
+	string TextAfterDecryption = DecryptText(TextAfterEncryption, Encryptionkey);
+
+	cout << "\nText Before Encryption : " << Text << endl;
+	cout << "Text After Encryption : " << TextAfterEncryption << endl;
+	cout << "Text After Decryption : " << TextAfterDecryption << endl;
+}

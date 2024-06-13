@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string ReadString()
+{
+	string Str;
+	cout << "Please Enter Your String?\n";
+	getline(cin, Str);
+	return Str;
+}
+
+vector<string> SplitString(string Str, string Delim)
+{
+	vector<string> vec;
+	short pos = 0;
+	string sWord;
+	while ((pos = Str.find(Delim)) != std::string::npos)
+	{
+		sWord = Str.substr(0, pos);
+		if (sWord != "")
+		{
+			vec.push_back(sWord);
+		}
+		//erase() until positon and move to next word.
+		Str.erase(0, pos + Delim.length());
+	}
+	if (Str != "")
+	{
+		vec.push_back(Str); // it add the last word of the string.
+	}
+	return vec;
+}
+
+int main()
+{
+	vector<string> vec;
+	vec = SplitString(ReadString(), " ");
+	cout << "Tokens = " << vec.size() << '\n';
+	for (string& s : vec)
+	{
+		cout << s << endl;
+	}
+}

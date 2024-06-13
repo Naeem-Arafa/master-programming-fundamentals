@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+template <typename T> T MyMAx(T N1, T N2)
+{
+    return (N1>N2) ? N1 : N2;
+}
+int main() 
+{
+    
+    cout << MyMAx<int>(1,2.5) <<endl;
+    cout << MyMAx<float>(1,2.5)<<endl;
+    cout << MyMAx<short>(1,2.5) <<endl;
+    
+    return 0;
+}
+//////////////////////Another Ex.//////////////
+#include <iostream>
+using namespace std;
+
+template <typename T>
+void Print(void* Ptr)
+{
+    cout << *((T*)Ptr) <<'\n';
+}
+int main() 
+{
+    
+    int x = 100;
+    char grade ='A';
+    Print<int>(&x);
+    Print<char>(&grade);
+
+    
+    return 0;
+}
+Explain Code:
+void mean empty so we do void* Ptr to book empty place in memory using pointer, we pass to it as ex.<int>(&x) thats make pointer refers to int place datatype when we pass char it's refers to char type, we use *((T*)Ptr) to extract value from ptr place to return it as val.

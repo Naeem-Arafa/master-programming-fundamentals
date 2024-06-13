@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class Calculator 
+{
+private:
+    T a, b;
+
+public:
+    Calculator(T n1, T n2)
+    {
+        a = n1;
+        b = n2;
+    }
+    T add() {
+        return a + b;
+    }
+
+    T subtract() {
+        return a - b;
+    }
+
+    T multiply() {
+        return a * b;
+    }
+
+    T divide() {
+        if (b == 0) {
+            cout << "Error: Division by zero\n";
+            return 0; // Return 0 in case of division by zero
+        }
+        return a / b;
+    }
+};
+
+int main() {
+    Calculator<int> intCalculator(2, 3);
+    Calculator<double> doubleCalculator(2.4, 5.6);
+
+    // Integer calculations
+    cout << "Integer Calculations:\n";
+    cout << "Addition: " << intCalculator.add() << endl;
+    cout << "Subtraction: " << intCalculator.subtract() << endl;
+    cout << "Multiplication: " << intCalculator.multiply() << endl;
+    cout << "Division: " << intCalculator.divide() << endl;
+
+    // Double calculations
+    cout << "\nDouble Calculations:\n";
+    cout << "Addition: " << doubleCalculator.add() << endl;
+    cout << "Subtraction: " << doubleCalculator.subtract() << endl;
+    cout << "Multiplication: " << doubleCalculator.multiply() << endl;
+    cout << "Division: " << doubleCalculator.divide() << endl;
+
+    return 0;
+}

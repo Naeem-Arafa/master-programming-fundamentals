@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+float ReadNumber(string massage)
+{
+	float Num;
+	cout << massage << "\n";
+	cin >> Num;	
+	return Num;
+}
+
+float MyCeil(float Num)
+{
+	if (Num == int(Num))
+	{
+		return int(Num);
+	}
+	else
+	{
+		if (Num >= 0)
+			return int(Num) + 1;
+		else
+			return int(Num);
+	}
+	
+}
+
+int main()
+{
+	float Num = ReadNumber("Pleaze enter the num? ");
+	cout << "My Ceil result: " << MyCeil(Num) << endl;
+	cout << "C++ Ceil result: " << ceil(Num) << endl;
+	return 0;
+}

@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+int ReadPositiveNumber(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num <= 0);
+
+	return Num;
+}
+
+int RandomNumber(int From, int To)
+{
+	int randomNum = rand() % (To - From + 1) + From;//this formola to make the random only in range
+	return randomNum;
+}
+
+
+void ReadArandomArray(int arr[100], int& arrLength)
+{
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(1, 100);
+	}
+	cout << endl;
+}
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+	cout << "\n";
+}
+
+bool SearchNumInArray(int arr[100], int arrLength, int SearchNum)
+{
+	for (int i = 0; i < arrLength; i++)
+	{
+		if (arr[i] == SearchNum)
+			return true;
+	}		
+	cout << "\n";
+	return false;
+}
+
+
+int main()
+{
+	srand((unsigned)time(NULL));
+	int arr[100], arrLength;
+	ReadArandomArray(arr, arrLength);
+	cout << "Array 1 elements is: ";
+	PrintArray(arr, arrLength);
+
+	int SearchNum = ReadPositiveNumber("Please enter a number to search it? ");
+	if (SearchNumInArray(arr, arrLength, SearchNum))
+	{
+		cout << "The Number looking for is: " << SearchNum << "\n";
+		cout << "Yes, the number is found:-)";
+	}
+	else
+	{
+		cout << "The Number looking for is: " << SearchNum << "\n";
+		cout << "No, the number is not found:-(";
+	}
+	
+	
+}

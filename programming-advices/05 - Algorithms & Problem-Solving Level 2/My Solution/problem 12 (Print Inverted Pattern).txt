@@ -1,0 +1,57 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+
+int ReadNum(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num <= 0);
+
+	return Num;
+}
+
+void PrintInvertedPattern(int Num)
+{
+	int Counter = 0;
+	for (int i = Num; i >= 1; i--)
+	{
+		Counter = i;
+		while (Counter > 0)
+		{
+			cout << i;
+			Counter--;
+		}	
+		cout << endl;
+	}
+}
+
+int main()
+{
+	PrintInvertedPattern(ReadNum("Enter The Positive Number? "));
+}
+
+
+
+
+
+#########################you Can Do This using two for loop########################
+
+
+void PrintInvertedPattern(int Number) 
+{ 
+ cout << "\n"; 
+ for (int i = Number; i >= 1; i--) 
+ { 
+ for (int j = 1; j <= i; j++) 
+ { 
+ cout << i; 
+ } 
+ cout << "\n"; 
+ } 
+} 

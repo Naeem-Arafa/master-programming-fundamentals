@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+
+int ReadNum(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num <= 0);
+
+	return Num;
+}
+
+void ReverseNumbers(int Num, int SearchNum)
+{
+	int Counter = 0;
+	while (Num != 0)
+	{
+		int rimainder = Num % 10;
+		Num = Num / 10;
+		if (rimainder == SearchNum)
+			Counter += 1;
+	}
+	cout << "Digit " << SearchNum << " Frequency is " << Counter << " Time";
+}
+
+
+int main()
+{
+	int N = ReadNum("Enter The Positive Number? ");
+	ReverseNumbers(N, ReadNum("Enter The Search Number? "));
+}
+
+
+
+
+
+
+For Profetinal Editting: 
+################# You Can Use short another int in a search num because it's One Digit####################

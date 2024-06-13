@@ -1,0 +1,37 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <string>
+
+#define ll long long
+using namespace std;
+
+string ReadString()
+{
+	string str = " ";
+	getline(cin, str);
+	return str;
+}
+
+void PrintFirstLettersInString(string str)
+{
+	cout << str[0] << endl;
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (i != str.size() - 1  && str[i] == ' ')
+		{
+			cout << str[i + 1] << '\n';
+		}
+	}
+}
+
+
+int main()
+{
+	PrintFirstLettersInString(ReadString());
+}
+
+
+
+

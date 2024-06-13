@@ -1,0 +1,85 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+//#include <string>
+
+#define ll long long
+using namespace std;
+
+short CountZeroMutrix(int arr[3][3], short Rows, short Cols)
+{
+	short Counter = 0;
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{		
+			if ( arr[i][j] == 0)
+			{
+				Counter++;
+			}
+		}
+	}
+	return Counter;
+}
+
+short CountNumAnotherZeroInMutrix(int arr[3][3], short Rows, short Cols)
+{
+	short Counter = 0;
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			if (arr[i][j] > 0)
+			{
+				Counter++;
+			}
+		}
+	}
+	return Counter;
+} 
+
+bool CheckSparce(short Cnt, short Cnt2)
+{
+	if (Cnt > Cnt2)
+	{
+		return true;
+	}
+	return false;
+}
+
+void PrintMatrix(int arr[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			printf(" %0*d   ", 2, arr[i][j]);
+		}
+		cout << '\n';
+	}
+}
+
+int main()
+{
+	int arr[3][3] = { {9, 0, 2}, {9, 0, 0}, {0, 0, 9} };
+	cout << "The following is a 3x3 random matrix 1:\n";
+	PrintMatrix(arr, 3, 3);
+	
+	if (CheckSparce(CountZeroMutrix(arr, 3, 3), CountNumAnotherZeroInMutrix(arr, 3, 3)))
+	{
+		cout << "\nYes: It is Sparce.\n";
+	}
+	else
+	{
+		cout << "\nNo: It's not Sparce.\n";
+	}
+
+}
+
+
+
+##################### Better Away ##############
+you can compare num of 0 with half of num matrix 
+if Num of 0 > (row*col)/2 -> is sparce.
+

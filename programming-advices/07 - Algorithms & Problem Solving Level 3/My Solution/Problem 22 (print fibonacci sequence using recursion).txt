@@ -1,0 +1,45 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+//#include <string>
+
+#define ll long long
+using namespace std;
+
+int ReadNum(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num < 0);
+
+	return Num;
+}
+
+
+
+void PrintFibonacci(int num, int Previus, int Current)
+{
+	int res = 0;
+	if (num > 0)
+	{
+		res = Previus + Current;
+		Previus = Current;
+		Current = res;
+		cout << res << '\t';
+		PrintFibonacci(num - 1, Previus, Current);
+	}
+}
+
+int main()
+{
+	PrintFibonacci(ReadNum("Enter the number to print fib to it?"), 1, 0);
+	
+}
+
+
+
+

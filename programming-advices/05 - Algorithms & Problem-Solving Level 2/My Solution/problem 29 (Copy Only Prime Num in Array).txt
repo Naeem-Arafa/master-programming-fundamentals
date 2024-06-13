@@ -1,0 +1,74 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+int RandomNumber(int From, int To)
+{
+	int randomNum = rand() % (To - From + 1) + From;//this formola to make the random only in range
+	return randomNum;
+}
+
+
+void ReadArandomArray(int arr[100], int& arrLength)
+{
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(1, 100);
+	}
+	cout << endl;
+}
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+	cout << "\n";
+}
+
+int CheckPrimeForNum(int m)
+{
+	for (int i = 2; i <= round(m / 2); i++)
+	{
+		if (m % i == 0)
+		{
+			return 0;
+		}
+
+	}
+	return 1;
+	return 0;
+}
+
+void CopyPrimeNumInArray(int arrSource[100], int arrDestination[100], int arrLength, int& arr2Length)
+{
+	int Counter = 0;
+	for (int i = 0; i < arrLength; i++)
+	{
+		if (CheckPrimeForNum(arrSource[i]))
+		{
+			arrDestination[Counter] = arrSource[i];
+			Counter++;
+		}
+			
+	}
+	arr2Length = --Counter;
+}
+
+int main()
+{
+	srand((unsigned)time(NULL));
+	int arr[100], arrLength;
+	ReadArandomArray(arr, arrLength);
+	int arr2[100], arr2Length;
+	CopyPrimeNumInArray(arr, arr2, arrLength, arr2Length);
+
+	cout << "Array 1 Elements: ";
+	PrintArray(arr, arrLength);
+
+	cout << "Array 2 Elements Prime: ";
+	PrintArray(arr2, arr2Length);
+	
+}

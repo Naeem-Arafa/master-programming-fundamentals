@@ -1,0 +1,120 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+short ReadNum(string massage)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < 0);
+
+    return Num;
+}
+
+short ReadNum(string massage, short From, short To)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < From || Num > To);
+
+    return Num;
+}
+
+bool IsLeapYear(short Year)
+{
+    return(Year % 400 == 0) || (Year % 4 == 0 && Year % 100 != 0);
+}
+
+short NumberOfDaysInMonth(short Month, short Year)
+{
+    if (Month < 1 || Month > 12)
+    {
+        return 0;
+    }
+
+    return (Month == 2) ? ((IsLeapYear(Year)) ? 29 : 28) :
+        (Month <= 7 && Month % 2 != 0) || (7 < Month && Month % 2 == 0) ? 31 : 30;
+}
+
+
+short NumberOfDays(short Day, short Month, short Year)
+{
+    short Days = 0;
+    for (short i = 1; i < Month; i++)
+    {
+        Days += NumberOfDaysInMonth(i, Year);
+    }
+    return Days + Day;
+}
+
+struct sDate
+{
+    short Day;
+    short Month;
+    short Year;
+};
+
+
+sDate DateByNumberOfDays(short Year, short NumberOfDays)
+{
+    sDate Date;
+    Date.Year = Year;
+    Date.Month = 1;
+    
+    while (NumberOfDays > NumberOfDaysInMonth(Date.Month, Date.Year))
+    {
+        if (Date.Month == 13)
+        {
+            Date.Year++;
+            Date.Month = 1;
+        }
+        NumberOfDays -= NumberOfDaysInMonth(Date.Month, Date.Year);
+        Date.Month++;
+    }
+    Date.Day = NumberOfDays;
+    
+    
+    return Date;
+}
+
+bool IsDate1EqualToDate2(sDate Date, sDate Date2)
+{
+    return (Date.Year == Date2.Year) && (Date.Month == Date2.Month) && (Date.Day == Date2.Day) ? true : false;
+}
+
+int main()
+{
+    //cout << INT_MAX;
+    short Day = ReadNum("Enter A Day? ", 1, 31);
+    short Month = ReadNum("Enter A Month? ", 1, 12);
+    short Year = ReadNum("Enter A Year? ");
+    
+    sDate Date;
+    sDate Date2;
+    Date = DateByNumberOfDays(Year, NumberOfDays(Day, Month, Year));
+
+    short Day2 = ReadNum("Enter A Day? ", 1, 31);
+    short Month2 = ReadNum("Enter A Month? ", 1, 12);
+    short Year2 = ReadNum("Enter A Year? ");
+    Date2 = DateByNumberOfDays(Year2, NumberOfDays(Day2, Month2, Year2));
+    if (IsDate1EqualToDate2(Date, Date2))
+    {
+        cout << "Yes, Date 1 is equal to Date2.\n";
+    }
+    else
+    {
+        cout << "No, Date 1 is not equal to Date2.\n";
+    }
+    return 0;
+}
+//2147483647
+
+

@@ -1,0 +1,42 @@
+#include <string>
+#include <iostream>
+using namespace std;
+
+string ReadString()
+{
+	string Str;
+	cout << "Please Enter Your String?\n";
+	getline(cin, Str);
+	return Str;
+}
+
+short CountWords(string Str)
+{
+	string delim = " ";
+	short Counter = 0;
+	short pos = 0;
+	string sWord;
+	// use find() function to get the position of the delimiters 
+	while ((pos = Str.find(delim)) != std::string::npos)
+	{
+		sWord = Str.substr(0, pos); 
+		if (sWord != "")
+		{
+			Counter++;
+		}
+		//erase() until positon and move to next word.
+		Str.erase(0, pos + delim.length());
+	}
+	if (Str != "")
+	{
+		Counter++; // it counts the last word of the string.
+	}
+	return Counter;
+}
+int main()
+{
+	string Str = ReadString();
+	cout << "\nThe number of words in your string is: ";
+	cout << CountWords(Str);
+	system("pause>0");
+}

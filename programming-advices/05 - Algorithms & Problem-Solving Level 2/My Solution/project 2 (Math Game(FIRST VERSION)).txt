@@ -1,0 +1,291 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+}
+
+enum enQuestionLevel { Easy = 1, Med = 2, Hard = 3, mix = 4 };
+enum enQuestionType { Add = 1, Sub = 2, Mul = 3, Div = 4, Mix = 5 };
+
+struct stQuestionInfo
+{
+	short NumberOfQuestion = 0;
+	short Number1 = 0;
+	short Number2 = 0;
+	enQuestionType OpType;
+	enQuestionLevel QuestionLevel;
+	enQuestionType ArithmeticProcess;
+	int CorrectAnswer = 0;
+	int UserAnswer = 0;
+	bool AnswerResult = false;
+};
+struct stQuezResults
+{
+	short NumberOfQuestion = 0;
+	string NameQuestionLevel;
+	string NameOpType;
+	short RightAnswer = 0;
+	short WrongAnswer = 0;
+};
+
+short ReadHowManyQuestions()
+{
+	short NumQuestions = 1;
+	do
+	{
+		cout << "How Many Questions do you want to answer ? " << "\n";
+		cin >> NumQuestions;
+	} while (NumQuestions < 1);
+
+	return NumQuestions;
+}
+
+enQuestionLevel ReadQuestionsLevel()
+{
+	short QuestionsLevel = 1;
+	do
+	{
+		cout << "Enter Questions Level [1] Easy, [2] Med, [3] Hard, [4]Mix ? " << "\n";
+		cin >> QuestionsLevel;
+	} while (QuestionsLevel < 1 || QuestionsLevel > 4);
+
+	return (enQuestionLevel)QuestionsLevel;
+}
+
+enQuestionType ReadQuestionsType()
+{
+	short QuestionsType = 1;
+	do
+	{
+		cout << "Enter Questions Type [1] Add, [2] Sub, [3] Mul, [4]Div, [5] Mix ? " << "\n";
+		cin >> QuestionsType;
+	} while (QuestionsType < 1 || QuestionsType > 5);
+
+	return (enQuestionType)QuestionsType;
+}
+
+short ReadNumFromQuestionLevel(enQuestionLevel QuestionLevel)
+{
+	switch (QuestionLevel)
+	{
+	case enQuestionLevel::Easy:
+		return RandomNumber(1, 10);
+		break;
+	case enQuestionLevel::Med:
+		return RandomNumber(10, 50);
+		break;
+	case enQuestionLevel::Hard:
+		return RandomNumber(50, 100);
+		break;
+	default:
+		return RandomNumber(1, 100);
+		break;
+	}
+}
+
+enQuestionType fillQuestionType(enQuestionType OperationType)
+{
+	if (OperationType == enQuestionType::Mix)
+		return (enQuestionType)RandomNumber(1, 4);
+	return OperationType;
+}
+
+int YourAnswer()
+{
+	int Num = 0;
+	cin >> Num;
+	return Num;
+}
+
+int MathematicalEquation(stQuestionInfo QsInfo)
+{
+	switch (QsInfo.ArithmeticProcess)
+	{
+	case enQuestionType::Add:
+		cout << QsInfo.Number1 << "\n";
+		cout << QsInfo.Number2 << " +\n";
+		cout << "_________________________\n";
+		return QsInfo.Number1 + QsInfo.Number2;
+		break;
+	case enQuestionType::Sub:
+		cout << QsInfo.Number1 << "\n";
+		cout << QsInfo.Number2 << " -\n";
+		cout << "_________________________\n";
+		return QsInfo.Number1 - QsInfo.Number2;
+		break;
+	case enQuestionType::Mul:
+		cout << QsInfo.Number1 << "\n";
+		cout << QsInfo.Number2 << " *\n";
+		cout << "_________________________\n";
+		return QsInfo.Number1 * QsInfo.Number2;
+		break;
+	case enQuestionType::Div:
+		cout << QsInfo.Number1 << "\n";
+		cout << QsInfo.Number2 << " /\n";
+		cout << "_________________________\n";
+		return QsInfo.Number1 / QsInfo.Number2;
+		break;
+	}
+}
+
+bool CheckTheAnswer(stQuestionInfo QsInfo)
+{
+	return QsInfo.UserAnswer == QsInfo.CorrectAnswer;
+}
+
+void PrintQuestionAnswer(stQuestionInfo QsInfo)
+{
+	if (QsInfo.AnswerResult)
+	{
+		cout << "Right Answer :-) \n" << endl;
+		system("color 2F"); //turn screen to Green
+	}
+	else
+	{
+		cout << "Wrong Answer :-( \n";
+		cout << "the right Answer is : " << QsInfo.CorrectAnswer << '\n' << endl;
+		system("color 4F"); //turn screen to Red
+		cout << "\a";
+	}
+}
+
+string QuestionName(enQuestionLevel Question)
+{
+	string ArrQuestionName[4] = { "Easy", "Med", "Hard", "Mix" };
+	return ArrQuestionName[Question - 1];
+}
+
+string OperationTypeName(enQuestionType OpType)
+{
+	string ArrOperationTypeName[5] = { "Add", "Sub", "Mul", "Div", "Mix" };
+	return ArrOperationTypeName[OpType - 1];
+}
+
+
+
+void ResetScreen()
+{
+	system("cls");
+	system("color 0F");
+}
+
+stQuezResults FillGameResults(short NumberOfQuestion, stQuestionInfo QsInfo, short RightAnswer, short WrongAnswer)
+{
+	stQuezResults QuezResults;
+	QuezResults.NumberOfQuestion = NumberOfQuestion;
+	QuezResults.NameQuestionLevel = QuestionName(QsInfo.QuestionLevel);
+	QuezResults.NameOpType = OperationTypeName(QsInfo.OpType);
+	QuezResults.RightAnswer = RightAnswer;
+	QuezResults.WrongAnswer = WrongAnswer;
+	return QuezResults;
+}
+
+void ShowFinalGameResults(stQuezResults QuezResults)
+{
+	cout << "Number of Question : " << QuezResults.NumberOfQuestion << '\n';
+	cout << "Question Level : " << QuezResults.NameQuestionLevel << '\n';
+	cout << "OpType :         " << QuezResults.NameOpType << '\n';
+	cout << "Number Of Right Answer : " << QuezResults.RightAnswer << '\n';
+	cout << "Number Of Wrong Answer : " << QuezResults.WrongAnswer << endl;
+
+}
+
+stQuezResults MathGame(short HowManyQuestion)
+{
+	short RightAnswer = 0;
+	short WrongAnswer = 0;
+	stQuestionInfo QsInfo;
+	QsInfo.QuestionLevel = ReadQuestionsLevel();
+	QsInfo.OpType = ReadQuestionsType();
+
+	for (int Question = 1; Question <= HowManyQuestion; Question++)
+	{
+		cout << "Question" << "[" << Question << "/" << HowManyQuestion << "]" << '\n';
+		QsInfo.NumberOfQuestion = HowManyQuestion;
+		QsInfo.Number1 = ReadNumFromQuestionLevel(QsInfo.QuestionLevel);
+		QsInfo.Number2 = ReadNumFromQuestionLevel(QsInfo.QuestionLevel);
+		QsInfo.ArithmeticProcess = fillQuestionType(QsInfo.OpType);
+		QsInfo.CorrectAnswer = MathematicalEquation(QsInfo);
+		QsInfo.UserAnswer = YourAnswer();
+		QsInfo.AnswerResult = CheckTheAnswer(QsInfo);
+		PrintQuestionAnswer(QsInfo);
+
+		if (QsInfo.AnswerResult)
+		{
+			RightAnswer++;
+		}
+		else
+		{
+			WrongAnswer++;
+		}
+	}
+
+	return FillGameResults(HowManyQuestion, QsInfo, RightAnswer, WrongAnswer);
+}
+
+void PrintPassOrNot(stQuezResults QuezResults)
+{
+
+	if (QuezResults.RightAnswer >= QuezResults.WrongAnswer)
+	{
+		cout << "__________________________\n\n";
+		cout << "Final Results is Pass :-)\n";
+		cout << "__________________________\n";
+		system("color 2F"); //turn screen to Green
+	}
+
+	else
+	{
+		cout << "__________________________\n\n";
+		cout << "Final Results is Faill :-(\n";
+		cout << "__________________________\n";
+		system("color 4F"); //turn screen to Red
+		cout << "\a";
+	}
+
+}
+
+void StartMAthGame()
+{
+	char CheckPlayAgain;
+	do
+	{
+		ResetScreen();
+		stQuezResults QuezResults = MathGame(ReadHowManyQuestions());
+		PrintPassOrNot(QuezResults);
+		ShowFinalGameResults(QuezResults);
+
+		cout << "do you want play game Again y/Y ?" << endl;
+		cin >> CheckPlayAgain;
+
+	} while (CheckPlayAgain == 'y' || CheckPlayAgain == 'Y');
+
+
+
+}
+
+
+int main()
+{
+	//Seeds the random number generator in C++, called only once
+	srand((unsigned)time(NULL));
+
+	StartMAthGame();
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+

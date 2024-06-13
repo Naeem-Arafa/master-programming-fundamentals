@@ -1,0 +1,124 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+class clsCalculator
+{
+private:
+	float _FinalResult;
+	float _LastNumber;
+	char _LastOperation;
+
+
+public:
+	
+	void Add(float Num)
+	{
+		_LastNumber = Num;
+		_LastOperation = '+';
+		_FinalResult += Num;
+	}
+
+	void Subtract(float Num)
+	{
+		_LastNumber = Num;
+		_LastOperation = '-';
+		_FinalResult -= Num;
+	}
+
+	void Divide(float Num)
+	{
+		if (Num == 0)
+		{
+			Num = 1;
+		}
+		_LastNumber = Num;
+		_LastOperation = '/';
+		_FinalResult /= Num;
+	}
+
+	void Multiply(float Num)
+	{
+		_LastNumber = Num;
+		_LastOperation = '*';
+		_FinalResult *= Num;
+	}
+
+	float GetFinalResults()
+	{
+		return _FinalResult;
+	}
+
+	void Clear()
+	{
+		_LastNumber = 0;
+		_LastOperation = ' ';
+		_FinalResult = 0;
+	}
+
+	void CancelLastOperation()
+	{
+		if (_LastOperation == '+')
+		{
+			_FinalResult -= _LastNumber;
+		}
+		if (_LastOperation == '-')
+		{
+			_FinalResult += _LastNumber;
+		}
+		if (_LastOperation == '/')
+		{
+			_FinalResult *= _LastNumber;
+		}
+		if (_LastOperation == '*')
+		{
+			_FinalResult /= _LastNumber;
+		}
+		
+	}
+
+	void PrintResult()
+	{
+		cout << _FinalResult << endl;
+	}
+	
+};
+
+
+int main()
+{
+	clsCalculator Calculator;
+	Calculator.Clear();
+
+	Calculator.Add(10);
+	Calculator.PrintResult();
+	
+	Calculator.Add(20);
+	Calculator.PrintResult();
+	
+	Calculator.Subtract(5);
+	Calculator.PrintResult();
+	
+	Calculator.Divide(5);
+	Calculator.PrintResult();
+	
+	Calculator.Multiply(10);
+	Calculator.PrintResult();
+	
+	Calculator.CancelLastOperation();
+	Calculator.PrintResult();
+	
+	Calculator.Divide(0);
+	Calculator.PrintResult();
+	
+	// Calculator.Clear();
+	// Calculator.PrintResult();
+	
+
+
+	return 0;
+}
+
+
+

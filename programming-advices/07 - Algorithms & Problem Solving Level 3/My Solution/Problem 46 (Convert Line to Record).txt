@@ -1,0 +1,84 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+
+using namespace std;
+
+struct sClient
+{
+	string AcountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AcountBalance;
+};
+
+string ReadString(string Massage)
+{
+	string S1;
+	cout << Massage << " ";
+	getline(cin, S1);
+	return S1;
+}
+
+
+vector<string> SplitString(string Str, string Delim)
+{
+	vector<string> vec;
+	short pos = 0;
+	string sWord;
+	while ((pos = Str.find(Delim)) != std::string::npos)
+	{
+		sWord = Str.substr(0, pos);
+		if (sWord != "")
+		{
+			vec.push_back(sWord);
+		}
+		//erase() until positon and move to next word.
+		Str.erase(0, pos + Delim.length());
+	}
+	if (Str != "")
+	{
+		vec.push_back(Str); // it add the last word of the string.
+	}
+	return vec;
+}
+
+
+sClient ConvertLineToRecord(string Line, string Sep = "#//#")
+{
+	sClient Client;
+	vector<string>vClientData;
+	vClientData = SplitString(Line, Sep);
+
+	Client.AcountNumber = vClientData[0];
+	Client.PinCode = vClientData[1];
+	Client.Name = vClientData[2];
+	Client.Phone = vClientData[3];
+	Client.AcountBalance = stod(vClientData[4]); // casting from string to double
+	return Client;
+}
+
+void PrintClientRecord(sClient Client)
+{
+	cout << "\n\n the following is the extracted client record:\n";
+	cout << "\nAcount Number: " << Client.AcountNumber;
+	cout << "\npin code     : " << Client.PinCode;
+	cout << "\nName: " << Client.Name;
+	cout << "\nPhone: " << Client.Phone;
+	cout << "\nAcount Balance: " << Client.AcountBalance;
+}
+
+int main()
+{
+	string stLine = ReadString("enter your string.");
+	cout << "\nLine Record is:\n";
+	cout << stLine;
+
+	sClient Client;
+	Client = ConvertLineToRecord(stLine);
+
+	PrintClientRecord(Client);
+
+}

@@ -1,0 +1,86 @@
+#pragma once
+#include <iostream>
+#include "clsDynamicArray.h"
+using namespace std;
+
+template <typename T>
+
+class clsMyQueueArr
+{
+protected:
+    clsDynamicArray <T> _MyList;
+
+public:
+    void push(T Value)
+    {
+        _MyList.InsertAtEnd(Value);
+    }
+
+    void Print()
+    {
+        _MyList.PrintList();
+    }
+
+    T Size()
+    {
+        return _MyList.Size();
+    }
+
+    T front()
+    {
+        return _MyList.GetItem(0);
+    }
+
+    T back()
+    {
+        return _MyList.GetItem(Size() - 1);
+    }
+
+    void pop()
+    {
+        _MyList.DeleteFirstItem();
+    }
+
+    T GetItem(int Index)
+    {
+        return _MyList.GetItem(Index);
+    }
+
+    void Reverse()
+    {
+        _MyList.Reverse();
+    }
+
+    void UpdateItem(int Index, T NewValue)
+    {
+        _MyList.SetItem(Index, NewValue);
+    }
+
+    void InsertAfter(int Index, T Value)
+    {
+        _MyList.InsertAfter(Index, Value);
+    }
+
+    void InsertAtFront(T Value)
+    {
+        _MyList.InsertAtBeginning(Value);
+    }
+
+    void InsertAtBack(T Value)
+    {
+        _MyList.InsertAtEnd(Value);
+    }
+
+    void Clear()
+    {
+        _MyList.Clear();
+    }
+	
+    bool Empty()
+    {
+    	return (_MyList.Size() == 0);
+    }
+
+};
+
+

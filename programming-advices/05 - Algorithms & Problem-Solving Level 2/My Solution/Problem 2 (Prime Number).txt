@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+int ReadANumber()
+{
+	int Num;
+	do
+	{
+		cout << "Please Enter The Positive Number > 1? \n";
+		cin >> Num;
+
+	} while (Num < 2);
+	
+	return Num;
+}
+
+int CheckPrimeForNum(int m)
+{
+	for (int i = 2; i <= round(m / 2); i++)
+	{
+		if (m % i == 0)
+		{
+			return 0;
+		}
+
+	}
+	cout << m << endl;
+	return 0;
+}
+
+void CheckPrime(int Num)
+{
+	int m = 2;
+	while (m <= Num)
+	{
+		CheckPrimeForNum(m);
+		m++;
+	}
+}
+
+
+int main()
+{
+	int n = ReadANumber();
+	CheckPrime(n);
+}

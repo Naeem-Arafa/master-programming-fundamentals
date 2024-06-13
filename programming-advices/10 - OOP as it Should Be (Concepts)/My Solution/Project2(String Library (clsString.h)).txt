@@ -1,0 +1,584 @@
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+class clsString
+{
+private:
+	string _Value;
+	char _Char;
+	string _Delim;
+
+public:
+	clsString()
+	{
+		_Value = "";
+	}
+
+	clsString(string Value)
+	{
+		_Value = Value;
+	}
+
+	clsString(char Char)
+	{
+		_Char = Char;
+	}
+
+	clsString(string Value, char Char)
+	{
+		_Value = Value;
+		_Char = Char;
+	}
+
+	void SetValue(string Value)
+	{
+		_Value = Value;
+	}
+
+	string GetValue()
+	{
+		return _Value;
+	}
+	
+	__declspec(property(get = GetValue, put = SetValue)) string Value;
+
+	void SetChar(char Char)
+	{
+		_Char = Char;
+	}
+
+	char GetChar()
+	{
+		return _Char;
+	}
+
+	__declspec(property(get = GetChar, put = SetChar)) char Char;
+
+	void SetDelim(char Delim)
+	{
+		_Delim = Delim;
+	}
+
+	string GetDelim()
+	{
+		return _Delim;
+	}
+
+	__declspec(property(get = GetDelim, put = SetDelim)) string Delim;
+
+
+	static void PrintFirstLettersInString(string str)
+	{
+		cout << str[0] << endl;
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (i != str.size() - 1 && str[i] == ' ')
+			{
+				cout << str[i + 1] << '\n';
+			}
+		}
+	}
+
+	void PrintFirstLettersInString()
+	{
+		PrintFirstLettersInString(_Value);
+	}
+
+	static string FirstLettersInStringInUpper(string str)
+	{
+		str[0] = toupper(str[0]);
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (i != str.size() - 1 && str[i] == ' ')
+			{
+				str[i + 1] = toupper(str[i + 1]);
+			}
+		}
+		return str;
+
+	}
+
+	string FirstLettersInStringInUpper()
+	{
+		return FirstLettersInStringInUpper(_Value);
+	}
+
+	static string FirstLettersInStringInLower(string str)
+	{
+		str[0] = tolower(str[0]);
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (i != str.size() - 1 && str[i] == ' ')
+			{
+				str[i + 1] = tolower(str[i + 1]);
+			}
+		}
+		return str;
+
+	}
+
+	string FirstLettersInStringInLower()
+	{
+		return FirstLettersInStringInLower(_Value);
+	}
+
+	static char FirstCharInString(string Value)
+	{
+		for (int i = 0; i < Value.size(); i++)
+		{
+			if (Value[i] != ' ')
+			{
+				return Value[i];
+			}
+		}
+	}
+
+	char FirstCharInString()
+	{
+		return FirstCharInString(_Value);
+	}
+
+	static char CharInUpper(char str)
+	{
+		str = toupper(str);
+		return str;
+	}
+
+	char CharInUpper()
+	{
+		return CharInUpper(_Char);
+	}
+
+	static char CharInLower(char str)
+	{
+		str = tolower(str);
+		return str;
+	}
+
+	char CharInLower()
+	{
+		return CharInLower(_Char);
+	}
+
+	static bool IsUpper(char str)
+	{
+		if (isupper(str))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	bool IsUpper()
+	{
+		return IsUpper(_Char);
+	}
+
+	static char InverseLetterCase(char str)
+	{
+		return isupper(str) ? tolower(str) : toupper(str);
+	}
+
+	char InverseLetterCase()
+	{
+		return InverseLetterCase(_Char);
+	}
+
+	static string InverseLetterCaseInString(string str)
+	{
+		string res = " ";
+		for (int i = 0; i < str.size(); i++)
+		{
+			res += InverseLetterCase(str[i]);
+		}
+		return res;
+	}
+
+	string InverseLetterCaseInString()
+	{
+		return InverseLetterCaseInString(_Value);
+	}
+
+	static short CountUpperChar(string str)
+	{
+		short Count = 0;
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (isupper(str[i]))
+			{
+				Count++;
+			}
+		}
+		return Count;
+	}
+
+	short CountUpperChar()
+	{
+		return CountUpperChar(_Value);
+	}
+
+	static short CountLowerChar(string str)
+	{
+		short Count = 0;
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (islower(str[i]))
+			{
+				Count++;
+			}
+		}
+		return Count;
+	}
+
+	short CountLowerChar()
+	{
+		return CountLowerChar(_Value);
+	}
+
+	static bool IsVowel(char ch)
+	{
+		ch = tolower(ch);
+		if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	bool IsVowel()
+	{
+		return IsVowel(_Char);
+	}
+
+	static short CountCharInString(string str, char ch)
+	{
+		short Count = 0;
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (str[i] == ch)
+			{
+				Count++;
+			}
+		}
+		return Count;
+	}
+
+	short CountCharInString()
+	{
+		return CountCharInString(_Value, _Char);
+	}
+
+	static short CountVowelChar(string str)
+	{
+		short Count = 0;
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (IsVowel(str[i]))
+			{
+				Count++;
+			}
+		}
+		return Count;
+	}
+
+	short CountVowelChar()
+	{
+		return CountVowelChar(_Value);
+	}
+
+	static void PrintVowels(string S1)
+	{
+		cout << "\nVowels in string are: ";
+		for (short i = 0; i < S1.length(); i++)
+		{
+			if (IsVowel(S1[i]))
+				cout << S1[i] << " ";
+		}
+	}
+
+	void PrintVowels()
+	{
+		return PrintVowels(_Value);
+	}
+
+	static void PrintEachWordInString(string S1)
+	{
+		string delim = " "; // delimiter 
+		cout << "\nYour string wrords are: \n\n";
+		short pos = 0;
+		string sWord; // define a string variable 
+		// use find() function to get the position of the delimiters 
+		while ((pos = S1.find(delim)) != std::string::npos)
+		{
+			sWord = S1.substr(0, pos); // store the word 
+			if (sWord != "")
+			{
+				cout << sWord << endl;
+			}
+			S1.erase(0, pos + delim.length()); /* erase() until
+		   positon and move to next word. */
+		}
+		if (S1 != "")
+		{
+			cout << S1 << endl; // it print last word of the string.
+		}
+	}
+
+	void PrintEachWordInString()
+	{
+		return PrintEachWordInString(_Value);
+	}
+
+	static short CountWords(string Str)
+	{
+		string delim = " ";
+		short Counter = 0;
+		short pos = 0;
+		string sWord;
+		// use find() function to get the position of the delimiters 
+		while ((pos = Str.find(delim)) != std::string::npos)
+		{
+			sWord = Str.substr(0, pos);
+			if (sWord != "")
+			{
+				Counter++;
+			}
+			//erase() until positon and move to next word.
+			Str.erase(0, pos + delim.length());
+		}
+		if (Str != "")
+		{
+			Counter++; // it counts the last word of the string.
+		}
+		return Counter;
+	}
+
+	short CountWords()
+	{
+		return CountWords(_Value);
+	}
+
+	static vector<string> SplitString(string Str, string Delim)
+	{
+		vector<string> vec;
+		short pos = 0;
+		string sWord;
+		while ((pos = Str.find(Delim)) != std::string::npos)
+		{
+			sWord = Str.substr(0, pos);
+			if (sWord != "")
+			{
+				vec.push_back(sWord);
+			}
+			//erase() until positon and move to next word.
+			Str.erase(0, pos + Delim.length());
+		}
+		if (Str != "")
+		{
+			vec.push_back(Str); // it add the last word of the string.
+		}
+		return vec;
+	}
+
+	vector<string> SplitString()
+	{
+		return SplitString(_Value, _Delim);
+	}
+
+	static string TrimLeft(string Str)
+	{
+		for (short i = 0; i < Str.length(); i++)
+		{
+			if (Str[i] != ' ')
+			{
+				return Str.substr(i, Str.length() - i);
+			}
+		}
+	}
+
+	string TrimLeft()
+	{
+		return TrimLeft(_Value);
+	}
+
+	static string TrimRight(string Str)
+	{
+		for (short i = Str.length() - 1; i >= 0; i--)
+		{
+			if (Str[i] != ' ')
+			{
+				return Str.substr(0, i + 1);
+			}
+		}
+	}
+
+	string TrimRight()
+	{
+		return TrimRight(_Value);
+	}
+
+	static string Trim(string Str)
+	{
+		return (TrimLeft(TrimRight(Str)));
+	}
+
+	string Trim()
+	{
+		return Trim(_Value);
+	}
+
+	static string LowerChar(string str)
+	{
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (!islower(str[i]))
+			{
+				str[i] = tolower(str[i]);
+			}
+		}
+		return str;
+	}
+
+	string LowerChar()
+	{
+		return LowerChar(_Value);
+	}
+
+	static vector<string> readstring()
+	{
+		vector<string> vec;
+		string str;
+		cout << "Enter strings (type 'done' to stop):\n";
+		do
+		{
+			getline(cin, str);
+			vec.push_back(str);
+
+		} while (LowerChar(str) != "stop");
+
+		return vec;
+	}
+
+	static string JoinString(vector<string> vec, string Delim)
+	{
+		string Str = "";
+		vec.pop_back();
+		for (string& s : vec)
+		{
+			Str = Str + s + Delim;
+		}
+		return Str.substr(0, Str.length() - Delim.length());
+	}
+
+	string JoinString()
+	{
+		return JoinString(readstring(), _Delim);
+	}
+
+	static string JoinString(string arrString[], short Length, string Delim)
+	{
+		string Str = "";
+		for (short i = 0; i < Length; i++)
+		{
+			Str = Str + arrString[i] + Delim;
+		}
+		return Str.substr(0, Str.length() - Delim.length());
+	}
+
+	static string ReverseWorldInString(string Str)
+	{
+		vector<string> vec;
+		string Str2 = "";
+		vec = SplitString(Str, " ");
+		vector<string>::iterator it = vec.end();
+		while (it != vec.begin())
+		{
+			--it;
+			Str2 += *it + " ";
+		}
+		Str2 = Str2.substr(0, Str2.length() - 1);// remove last space
+		return Str2;
+	}
+
+	string ReverseWorldInString()
+	{
+		return ReverseWorldInString(_Value);
+	}
+
+	static string ReplaceWorldInString(string Str, string StringToReplace, string ReplaceTo)
+	{
+		short pos = Str.find(StringToReplace);
+		while (pos != std::string::npos)
+		{
+			Str = Str.replace(pos, StringToReplace.length(), ReplaceTo);
+			pos = Str.find(StringToReplace);
+		}
+		return Str;
+	}
+
+	static string LowerAllString(string Str)
+	{
+		for (short i = 0; i < Str.length(); i++)
+		{
+			Str[i] = tolower(Str[i]);
+		}
+		return Str;
+	}
+
+	string LowerAllString()
+	{
+		return LowerAllString(_Value);
+	}
+
+	static string ReplaceWorldInString(string Str, string StringToReplace, string ReplaceTo, bool check = true)
+	{
+		vector<string> vec = SplitString(Str, " ");
+		for (string& s : vec)
+		{
+			if (check)
+			{
+				if (s == StringToReplace)
+				{
+					s = ReplaceTo;
+				}
+			}
+			else
+			{
+				if (LowerAllString(s) == LowerAllString(StringToReplace))
+				{
+					s = ReplaceTo;
+				}
+			}
+		}
+		return JoinString(vec, " ");
+
+	}
+
+	static string RemovePunctuation(string Str)
+	{
+		string Str2 = "";
+		for (short i = 0; i < Str.length(); i++)
+		{
+			if (!ispunct(Str[i]))
+			{
+				Str2 += Str[i];
+			}
+		}
+		return Str2;
+
+	}
+
+	string RemovePunctuation()
+	{
+		return RemovePunctuation(_Value);
+	}
+
+};
+

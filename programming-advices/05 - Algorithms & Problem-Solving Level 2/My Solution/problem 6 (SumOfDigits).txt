@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+
+int ReadNum(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num <= 0);
+
+	return Num;
+}
+
+void ReverseNumbers(int Num)
+{
+	int Sum = 0;
+	while (Num != 0)
+	{
+		int rimainder = Num % 10;
+		Num = Num / 10;
+		Sum += rimainder;
+	}
+	cout << Sum;
+}
+
+
+int main()
+{
+	ReverseNumbers(ReadNum("Enter The Positive Number? "));
+}

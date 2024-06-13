@@ -1,0 +1,105 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+short ReadNum(string massage)
+{
+    short Num;
+    do
+    {
+        cout << massage << " ";
+        cin >> Num;
+    } while (Num < 0);
+
+    return Num;
+}
+
+bool IsLeapYear(short Year)
+{
+    return(Year % 400 == 0) || (Year % 4 == 0 && Year % 100 != 0);
+}
+
+short NumberOfDaysInMonth(short Month, short Year)
+{
+    if (Month < 1 || Month > 12)
+    {
+        return 0;
+    }
+
+    return (Month == 2) ? ((IsLeapYear(Year)) ? 29 : 28) :
+        (Month <= 7 && Month % 2 != 0) || (7 < Month && Month % 2 == 0) ? 31 : 30;
+}
+
+string Date(short Day, short Month, short Year)
+{
+    return to_string(Day) + '\\' + to_string(Month) + '\\' + to_string(Year);
+}
+
+short DateOrder(short Day, short Month, short Year)
+{
+    short a = (14 - Month) / 12;
+    short y = Year - a;
+    short m = Month + 12 * a - 2;
+    short d = (Day + y + (y / 4) - (y / 100) + (y / 400) + (31 * m / 12)) % 7;
+    return d;
+}
+
+string DateName(short Day)
+{
+    string arr[7] = { "Sun", "Mon", "Tus", "Wed", "Thu", "Fri", "Sat" };
+    return arr[Day];
+}
+
+string MonthName(short Month)
+{
+    string arr[12] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    return arr[Month - 1];
+}
+
+void PrintMonthCalender(short Month, short Year)
+{
+    printf("\n  _______________%s_______________\n\n", MonthName(Month).c_str());
+    printf("  Sun  Mon  Tus  Wed  Thu  Fri  Sat\n");
+    short StartDay = DateOrder(1, Month, Year);
+    short NumDays = NumberOfDaysInMonth(Month, Year);
+    short Cnt = 0;
+    for (short i = 0; i < StartDay; i++)
+    {
+        cout << "     ";
+        Cnt++;
+    }
+    for (short i = 1; i <= NumDays; i++)
+    {
+
+        if (Cnt % 7 == 0)
+            cout << endl;
+        printf("%5d", i);
+        Cnt++;
+    }
+    printf("\n  _________________________________\n\n");
+}
+
+void PrintYearCalender(short Year)
+{
+    printf("\n  _________________________________\n");
+    printf("\n             Calender - %d", Year);
+    printf("\n  _________________________________\n");
+    for(short i = 1; i <= 12; i++)
+    {
+        PrintMonthCalender(i, Year);
+    }
+}
+
+int main()
+{
+    //cout << INT_MAX;
+    short Year = ReadNum("Enter A Year? ");
+    PrintYearCalender(Year);
+
+    return 0;
+}
+//2147483647
+
+

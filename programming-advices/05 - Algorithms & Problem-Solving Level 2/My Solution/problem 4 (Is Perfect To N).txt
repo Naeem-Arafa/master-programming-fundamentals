@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+
+int ReadNum(string massage)
+{
+	int Num;
+	do
+	{
+		cout << massage << "\n";
+		cin >> Num;
+	} while (Num <= 0);
+
+	return Num;
+}
+
+bool CheckPerfect(int Num)
+{
+	int Sum = 0;
+	for (int i = 1; i <= round(Num / 2); i++)
+	{
+		if (Num % i == 0)
+			Sum += i;
+	}
+
+	return Num == Sum;
+}
+
+void PrintResultToN(int Num)
+{
+	for (int i = 1; i <= Num; i++)
+	{
+		if (CheckPerfect(i))
+			cout << i << "\n";
+	}
+}
+
+int main()
+{
+	PrintResultToN(ReadNum("Enter The Positive Number? "));
+}

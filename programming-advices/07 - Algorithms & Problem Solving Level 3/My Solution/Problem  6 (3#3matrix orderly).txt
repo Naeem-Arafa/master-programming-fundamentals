@@ -1,0 +1,48 @@
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <vector>
+
+#define ll long long
+using namespace std;
+
+
+void FillMatrixWithOrderedNumbers(int arr[3][3], short Rows, short Cols)
+{
+	short x = 0;
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			x++;
+			arr[i][j] = x;
+		}
+	}
+}
+
+void PrintMatrix(int arr[3][3], short Rows, short Cols)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			cout << setw(3) << arr[i][j] << "\t\t";
+		}
+		cout << '\n';
+	}
+}
+
+int main()
+{
+	int arr[3][3];
+
+	FillMatrixWithOrderedNumbers(arr, 3, 3);
+	cout << "The following is a 3x3 ordered matrix:\n";
+	PrintMatrix(arr, 3, 3);
+
+}
+
+
+
+

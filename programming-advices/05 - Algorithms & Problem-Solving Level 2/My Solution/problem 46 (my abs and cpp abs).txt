@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+float ReadNumber(string massage)
+{
+	float Num;
+	cout << massage << "\n";
+	cin >> Num;	
+	return Num;
+}
+
+float MyAbs(float Num)
+{
+	if (Num >= 0)
+		return Num;
+	else
+		return -Num;
+}
+
+int main()
+{
+	float Num = ReadNumber("Pleaze enter the num? ");
+	cout << "My abs result: " << MyAbs(Num) << endl;
+	cout << "C++ abs result: " << abs(Num) << endl;
+
+	return 0;
+}
