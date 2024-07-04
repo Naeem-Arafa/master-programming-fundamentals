@@ -137,8 +137,8 @@ The `elzero-web-school` folder contains content from Elzero Web School, known fo
 1. [LeetCode](https://leetcode.com/)
 2. [Codeforces](https://codeforces.com/)
 3. [HackerRank](https://www.hackerrank.com/)
-4. [Sheet Dr.Mostafa Saad (Problem Solving)](https://docs.google.com/spreadsheets/u/0/d/1iJZWP2nS_OB3kCTjq8L6TrJJ4o-5lhxDOyTaocSYc-k/htmlview?pli=1#gid=123190759)
-5. [Sheet Assiut (Problem Solving)](https://g.co/kgs/Bfnxgi)
+4. [Sheet Dr.Mostafa Saad (course)](https://docs.google.com/spreadsheets/u/0/d/1iJZWP2nS_OB3kCTjq8L6TrJJ4o-5lhxDOyTaocSYc-k/htmlview?pli=1#gid=123190759)
+5. [Sheet Assiut (course)](https://g.co/kgs/Bfnxgi)
 
 ## Extensions
 
@@ -170,8 +170,7 @@ The `elzero-web-school` folder contains content from Elzero Web School, known fo
 7. Do not study it all at once, but make it part of your day, for example, 3 hours a day as a constant thing in addition to what you are studying.
 
 ## Finalist
-- This content is private and has been collected by me for personal use. It may become public at a later date, but that decision has not been made yet. I will evaluate the possibility of sharing it with the public in the future.
-- Feel free to explore the repository and use these resources to enhance your programming skills. Contributions and suggestions are welcome to make this repository even more valuable for the programming community.
+- Contributions and suggestions are welcome to make this repository even more valuable for the programming community.
 
 ## Getting Started
 
